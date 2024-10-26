@@ -1,6 +1,7 @@
 #include "mpu6050.h" 
 #include "stdio.h"
 #include "usart.h"
+#define IMU_GYRO_TRANS_RADIAN_CONSTANT (4213.359738)
 
 //初始化MPU6050
 //返回值:0,成功

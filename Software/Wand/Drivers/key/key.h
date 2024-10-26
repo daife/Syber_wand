@@ -79,24 +79,24 @@ typedef enum
 	KEY_3_UP,				/* 3键弹起 */
 	KEY_3_LONG,				/* 3键长按 */
 	
-	VKEY1,/*虚拟按键，可用于语音、蓝牙、手势对应的操作*/
-	VKEY2,
-	VKEY3,
-		VKEY4,
-	VKEY5,
-	VKEY6,
-		VKEY7,
-	VKEY8,
-	VKEY9,
-		VKEY10,
-	VKEY11,
-	VKEY12,
+//	VKEY1,/*虚拟按键，可用于语音、蓝牙、手势对应的操作*/
+//	VKEY2,
+//	VKEY3,
+//		VKEY4,
+//	VKEY5,
+//	VKEY6,
+//		VKEY7,
+//	VKEY8,
+//	VKEY9,
+//		VKEY10,
+//	VKEY11,
+//	VKEY12,
 
 
 }KEY_ENUM;
 
 /* 按键FIFO用到变量 */
-#define KEY_FIFO_SIZE	50
+#define KEY_FIFO_SIZE	10
 typedef struct
 {
 	uint8_t Buf[KEY_FIFO_SIZE];		/* 键值缓冲区 */

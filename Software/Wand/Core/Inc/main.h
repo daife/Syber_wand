@@ -36,7 +36,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+extern short gx,gy,gz;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -73,7 +73,35 @@ void Error_Handler(void);
 #define IR_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+#define QUANTIFICATION_SCALE (pow(2,INPUT_1_OUTPUT_DEC))
+#define OUPUT_THRESHOLD 63 //The out put of model must bigger than this value unless the out put would be unrecognized.
+#define IMU_SEQUENCE_LENGTH_MAX (150)
 
+//+-500 to radian is divided by (73.537*180/PI) = 4213.359738
+#define IMU_GYRO_TRANS_RADIAN_CONSTANT (4213.359738) 
+typedef enum IMU_GYRO_Index{
+	Roll = 0,
+	Pitch = 1,
+	Yaw = 2
+
+}IMU_GYRO_Index;
+
+typedef enum eModel_Output{
+	Unrecognized = -1,
+	RightAngle = 0,
+	SharpAngle = 1,
+	Lightning = 2,
+	Triangle = 3,
+	Letter_h = 4,
+	letter_R = 5,
+	letter_W = 6,
+	letter_phi = 7,
+	Circle = 8,
+	UpAndDown = 9,
+	Horn = 10,
+	Wave = 11,
+	NoMotion = 12
+}eModel_Output;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

@@ -81,7 +81,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>0</RunUserProg2>
+            <RunUserProg2>1</RunUserProg2>
             <UserProg1Name></UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Drivers/W25Q16;../Drivers/nnom/port;../Drivers/nnom/inc/layers;../Drivers/nnom/inc;../Drivers/mpu6050;../Drivers/key;../Drivers/IR_Decoder/include;..\Drivers\RGB;..\Drivers\mpu6050</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../Drivers/W25Q16;../Drivers/nnom/port;../Drivers/nnom/inc/layers;../Drivers/nnom/inc;../Drivers/mpu6050;../Drivers/key;../Drivers/IR_Decoder/include;../Drivers/RGB;../Drivers/nnom</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1008,6 +1008,166 @@
               <FileName>nnom_local_q15.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Drivers\nnom\src\backends\nnom_local_q15.c</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\port\nnom_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\nnom.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_layers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\nnom_layers.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_local.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\nnom_local.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_tensor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\nnom_tensor.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\nnom_utils.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_activation.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_activation.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_avgpool.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_avgpool.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_baselayer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_baselayer.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_concat.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_concat.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_conv2d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_conv2d.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_conv2d_trans.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_conv2d_trans.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_cropping.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_cropping.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_dense.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_dense.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_dw_conv2d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_dw_conv2d.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_flatten.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_flatten.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_global_pool.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_global_pool.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_gru_cell.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_gru_cell.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_input.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_input.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_lambda.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_lambda.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_lstm_cell.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_lstm_cell.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_matrix.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_matrix.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_maxpool.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_maxpool.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_output.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_output.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_reshape.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_reshape.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_rnn.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_rnn.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_simple_cell.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_simple_cell.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_softmax.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_softmax.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_sumpool.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_sumpool.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_upsample.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_upsample.h</FilePath>
+            </File>
+            <File>
+              <FileName>nnom_zero_padding.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\inc\layers\nnom_zero_padding.h</FilePath>
+            </File>
+            <File>
+              <FileName>weights.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Drivers\nnom\weights.h</FilePath>
             </File>
           </Files>
         </Group>

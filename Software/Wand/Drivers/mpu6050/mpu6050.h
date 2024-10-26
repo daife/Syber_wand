@@ -2,7 +2,7 @@
 #define __MPU6050_H
 
 //#include "stm32f4xx_hal.h"		
-#include "stm32f1xx_hal.h"	用什么系列就是什么									  	  
+#include "stm32f1xx_hal.h"	//用什么系列就是什么									  	  
 
 
 //#define MPU_ACCEL_OFFS_REG		0X06	//accel_offs寄存器,可读取版本号,寄存器手册未提到

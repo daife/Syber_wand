@@ -14,6 +14,9 @@ static uint8_t IsKey2Down(void);
 static uint8_t IsKey3Down(void);
 static void KEY_Detect(uint8_t i);
 
+extern short gx,gy,gz;
+
+
 /*
 *********************************************************************************************************
 *	函 数 名: KEY_Init
@@ -28,8 +31,8 @@ void KEY_Init(void)
 	//KEY_GPIO_Config();		/* 初始化按键硬件 */
 	/*自定义按键变量*/
 	KEY_SetParam(0,50,0);//用户按键，不连发
-	KEY_SetParam(1,300,0);//陀螺仪，不连发,3s定时作为开关
-	KEY_SetParam(2,300,0);
+	KEY_SetParam(1,30,0);//陀螺仪，不连发
+	KEY_SetParam(2,30,0);
 }
 /*
 *********************************************************************************************************
@@ -107,20 +110,20 @@ static uint8_t IsKey1Down(void)
 	else 
 		return 0;
 }
-//到时候定义陀螺仪方向
+//暂时为roll的角速度大小
 static uint8_t IsKey2Down(void) 
 {
-//	if (HAL_GPIO_ReadPin() == GPIO_PIN_RESET) 
-//		return 1;
-//	else 
+	if (gx<=-400) 
+		return 1;
+	else 
 		return 0;
 }
 
 static uint8_t IsKey3Down(void) 
 {
-//	if (HAL_GPIO_ReadPin(Up_GPIO_Port,Up_Pin) == GPIO_PIN_RESET) 
-//		return 1;
-//	else 
+	if (gx>=400) 
+		return 1;
+	else 
 		return 0;
 }
 
@@ -315,6 +318,3 @@ static void KEY_Detect(uint8_t i)
 		pBtn->RepeatCount = 0;
 	}
 }
-
-
-/***************************** 智果芯 www.zhiguoxin.cn (END OF FILE) *********************************/
