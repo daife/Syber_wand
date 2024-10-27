@@ -37,6 +37,7 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 extern short gx,gy,gz;
+extern uint8_t ENrecognize;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -88,19 +89,19 @@ typedef enum IMU_GYRO_Index{
 
 typedef enum eModel_Output{
 	Unrecognized = -1,
-	RightAngle = 0,
-	SharpAngle = 1,
-	Lightning = 2,
-	Triangle = 3,
-	Letter_h = 4,
-	letter_R = 5,
-	letter_W = 6,
-	letter_phi = 7,
-	Circle = 8,
-	UpAndDown = 9,
-	Horn = 10,
-	Wave = 11,
-	NoMotion = 12
+	RightAngle = 10,
+	SharpAngle,
+	Lightning,
+	Triangle,
+	Letter_h,
+	letter_R,
+	letter_W,
+	letter_phi,
+	Circle,
+	UpAndDown,
+	Horn,
+	Wave,
+	NoMotion
 }eModel_Output;
 /* USER CODE END Private defines */
 

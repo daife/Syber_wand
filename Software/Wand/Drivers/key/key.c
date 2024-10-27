@@ -15,6 +15,7 @@ static uint8_t IsKey3Down(void);
 static void KEY_Detect(uint8_t i);
 
 extern short gx,gy,gz;
+extern uint8_t ENrecognize;
 
 
 /*
@@ -113,7 +114,7 @@ static uint8_t IsKey1Down(void)
 //暂时为roll的角速度大小
 static uint8_t IsKey2Down(void) 
 {
-	if (gx<=-400) 
+	if (ENrecognize&&gx<=-400) 
 		return 1;
 	else 
 		return 0;
@@ -121,7 +122,7 @@ static uint8_t IsKey2Down(void)
 
 static uint8_t IsKey3Down(void) 
 {
-	if (gx>=400) 
+	if (ENrecognize&&gx>=400) 
 		return 1;
 	else 
 		return 0;

@@ -114,7 +114,7 @@ INT8 ir_file_open(const UINT8 category, const UINT8 sub_category, const char* fi
         printf("wrong remote category : %d\n", category);
         return IR_DECODE_FAILED;
     }
-    remote_category = category;
+    remote_category = (t_remote_category) category;
 
     if (sub_category < SUB_CATEGORY_QUATERNARY ||
         sub_category >= SUB_CATEGORY_NEXT)

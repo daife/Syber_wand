@@ -64,6 +64,14 @@ uint8_t data_feed_On=0;
 uint8_t count=0;//feed count
 short gyro[150][3]={0};
 uint8_t received=0;
+uint8_t KeyCode=0;
+
+//Enabletype
+uint8_t ENrecognize=0;
+uint8_t ENkey1up=0;//bagayalu ,it's all AC's fault
+uint8_t ENwork=0;
+//uint8_t workState=0;//0 for IR&1 for BLE...use gpio read
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -121,52 +129,52 @@ int8_t model_get_output(void)
 			break;
 		case RightAngle:
 			printf("RightAngle");
-		KEY_FIFO_Put(10+RightAngle);//+10 to match fifo enum
+		KEY_FIFO_Put(RightAngle);//+10 to match fifo enum
 		
 			break;
 		case SharpAngle:
 			printf("SharpAngle");
-				KEY_FIFO_Put(10+SharpAngle);
+				KEY_FIFO_Put(SharpAngle);
 			break;
 		case Lightning:
 			printf("Lightning");
-				KEY_FIFO_Put(10+Lightning);
+				KEY_FIFO_Put(Lightning);
 			break;
 		case Triangle:
 			printf("Triangle");
-		KEY_FIFO_Put(10+Triangle);
+		KEY_FIFO_Put(Triangle);
 			break;
 		case Letter_h:
 			printf("Letter_h");
-				KEY_FIFO_Put(10+Letter_h);
+				KEY_FIFO_Put(Letter_h);
 			break;
 		case letter_R:
 			printf("Letter_R");
-				KEY_FIFO_Put(10+letter_R);
+				KEY_FIFO_Put(letter_R);
 			break;
 		case letter_W:
 			printf("Letter_W");
-				KEY_FIFO_Put(10+letter_W);
+				KEY_FIFO_Put(letter_W);
 			break;
 		case letter_phi:
 			printf("Letter_phi");
-				KEY_FIFO_Put(10+letter_phi);
+				KEY_FIFO_Put(letter_phi);
 			break;
 		case Circle:
 			printf("Circle");
-				KEY_FIFO_Put(10+Circle);
+				KEY_FIFO_Put(Circle);
 			break;
 		case UpAndDown:
 			printf("UpAndDown");
-				KEY_FIFO_Put(10+UpAndDown);
+				KEY_FIFO_Put(UpAndDown);
 			break;
 		case Horn:
 			printf("Horn");
-				KEY_FIFO_Put(10+Horn);
+				KEY_FIFO_Put(Horn);
 			break;
 		case Wave:
 			printf("Wave");
-				KEY_FIFO_Put(10+Wave);
+				KEY_FIFO_Put(Wave);
 			break;
 		case NoMotion:
 			printf("Unrecognized");
@@ -179,11 +187,13 @@ int8_t model_get_output(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_0)//10msä¸?æ¬?
+	if(GPIO_Pin == GPIO_PIN_0)//T=10ms
 		{
-			//é™?èžºä»ª
 			MPU_Get_Gyroscope(&gx,&gy,&gz);
-			if(data_feed_On){
+			if(ENwork&&! HAL_GPIO_ReadPin(USER_Button2_GPIO_Port,USER_Button2_Pin)){
+				//send xyz to simulate mouse move
+				}
+			if(ENrecognize&& ENwork &&data_feed_On){
 			gyro[count][Roll]=gx;
 			gyro[count][Pitch]=gy;
 				gyro[count][Yaw]=gz;
@@ -201,10 +211,44 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	if(huart==&huart3){//from asrpro
-		switch();
-		received=0;
+	if(huart==&huart3&&ENrecognize){//from asrpro
+		switch(received){
+			case 1:
+				//ENwork, simulate key2
+			KEY_FIFO_Put(KEY_2_DOWN);
+			break;
+			case 2:
+				//simulate key3
+				KEY_FIFO_Put(KEY_3_DOWN);
+			break;
+		}
+		if(ENwork){//only ENwork,it can do other cmd from asrpro
+		switch(received){
+			case 3:
+			break;
+			//...
+		
+		}
+		}
+		
 	}
+	
+	
+	if(huart==&huart2){//from shangweiji ,highest permission
+	switch(received){
+			case 1:
+				//
+			break;
+	//...for example ,switch AC agreement or put fifo key
+		
+		
+		
+		
+		}
+	}
+	
+	
+	received=0;//clear
 }
 /* USER CODE END PFP */
 
@@ -273,6 +317,50 @@ HAL_UART_Receive_IT(&huart2,&received,1);
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+				KeyCode = KEY_FIFO_Get();	
+		if (KeyCode != KEY_NONE)
+		{
+			switch (KeyCode)
+			{
+				case KEY_DOWN_K1:
+					HAL_GPIO_WritePin(PA1_LED_GPIO_Port,PA1_LED_Pin,GPIO_PIN_RESET);
+				ENrecognize=1;
+				ENkey1up=1;
+				if(! HAL_GPIO_ReadPin(USER_Button2_GPIO_Port,USER_Button2_Pin)){
+				//click mouse
+				}
+					break;
+				case KEY_1_LONG:
+					ENkey1up=0;
+				//...rgb ,finger light slowly
+				break;
+				case KEY_1_UP:
+				HAL_GPIO_WritePin(PA1_LED_GPIO_Port,PA1_LED_Pin,GPIO_PIN_SET);
+					data_feed_On=0;
+					count=0;
+					ENrecognize=0;
+				if(ENkey1up&&HAL_GPIO_ReadPin(USER_Button2_GPIO_Port,USER_Button2_Pin)){
+				//toggle AC power
+				}
+				ENkey1up=1;
+				break;
+				case KEY_DOWN_K2:	
+					ENwork=1;
+					break;
+				case KEY_2_LONG:
+					break;
+				case KEY_DOWN_K3://like key1up
+					ENwork=0;
+								HAL_GPIO_WritePin(PA1_LED_GPIO_Port,PA1_LED_Pin,GPIO_PIN_SET);
+					data_feed_On=0;
+					count=0;
+					ENrecognize=0;
+								ENkey1up=1;
+					break;								
+				default:
+					break;
+			}
+		}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
