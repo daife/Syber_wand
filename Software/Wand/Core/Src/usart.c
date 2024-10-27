@@ -317,15 +317,5 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
      return (ch);
  }
 
- void ShowHex(uint8_t *buf,uint8_t len)
-{
-    uint8_t i;
-    printf("hex = ");
-    for( i = 0; i < len; i++){
-        printf(" %02X",buf[i]); //使用前导0补齐
-        //printf(" %2X",buf[i]);  //使用前导空格补齐
-        //printf(" %X",buf[i]);  //输出�?短的16进制格式
-    }
-    printf( "\r\n");
-}
+
 /* USER CODE END 1 */

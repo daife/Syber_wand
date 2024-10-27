@@ -74,35 +74,7 @@ void Error_Handler(void);
 #define IR_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-#define QUANTIFICATION_SCALE (pow(2,INPUT_1_OUTPUT_DEC))
-#define OUPUT_THRESHOLD 63 //The out put of model must bigger than this value unless the out put would be unrecognized.
-#define IMU_SEQUENCE_LENGTH_MAX (150)
 
-//+-500 to radian is divided by (73.537*180/PI) = 4213.359738
-#define IMU_GYRO_TRANS_RADIAN_CONSTANT (4213.359738) 
-typedef enum IMU_GYRO_Index{
-	Roll = 0,
-	Pitch = 1,
-	Yaw = 2
-
-}IMU_GYRO_Index;
-
-typedef enum eModel_Output{
-	Unrecognized = -1,
-	RightAngle = 10,
-	SharpAngle,
-	Lightning,
-	Triangle,
-	Letter_h,
-	letter_R,
-	letter_W,
-	letter_phi,
-	Circle,
-	UpAndDown,
-	Horn,
-	Wave,
-	NoMotion
-}eModel_Output;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

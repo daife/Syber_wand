@@ -1,4 +1,4 @@
---cpu Cortex-M3
+--cpu Cortex-M3 --lto
 "wand\startup_stm32f103xb.o"
 "wand\main.o"
 "wand\gpio.o"
