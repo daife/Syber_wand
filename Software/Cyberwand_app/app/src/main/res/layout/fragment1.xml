@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:padding="32dp"
+     android:orientation="horizontal"
+     android:columnCount="5"
+     android:rowCount="5">
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button1"
+         android:text="aux1" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button2"
+         android:text="aux2" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button3"
+         android:text="aux3" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button4"
+         android:text="aux4" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button5"
+         android:text="None" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button6"
+         android:text="gree1" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button7"
+         android:text="gree2" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button8"
+         android:text="gree3" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button9"
+         android:text="gree4" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button10"
+         android:text="gree5" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button11"
+         android:text="haier1" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button12"
+         android:text="haier2" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button13"
+         android:text="haier3" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button14"
+         android:text="haier4" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button15"
+         android:text="haier5" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button16"
+         android:text="meidi1" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button17"
+         android:text="meidi2" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button18"
+         android:text="meidi3" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button19"
+         android:text="meidi4" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button20"
+         android:text="meidi5" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button21"
+         android:text="haixin1" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button22"
+         android:text="haixin2" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button23"
+         android:text="haixin3" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button24"
+         android:text="haixin4" />
+
+    <Button
+         android:layout_height="100dp"
+         android:layout_width="68dp"
+
+         android:id="@+id/button25"
+         android:text="haixin5" />
+
+</GridLayout>
