@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "tim.h"
 #include "gpio.h"
 
@@ -33,7 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define RGB_NUM 12
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -50,39 +51,35 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+// 流水灯效
+void rgb_loop(RGB_Color_TypeDef Color){
+	uint16_t i;
+	for(i=0;i<RGB_NUM;i++){
+		RGB_SetColor(i,RGB_Color_TypeDef Color);
+		HAL_Delay(100);
+	}
+	Reset_Load();
+	RGB_SendArray();
+}
+// 呼吸灯效
+void rgb_breathe(RGB_Color_TypeDef Color){
+	RGB_SetColor(2,RGB_Color_TypeDef Color);
+	Reset_Load();
+	RGB_SendArray();
+	for(int i=0;i<100;i++){
+		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,i);
+		HAL_Delay(10);
+	}
+	for(int i=99;i>=0;i--){
+		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,i);
+		HAL_Delay(10);
+	}
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//微秒延迟
 
-void user_delaynus_tim(uint32_t nus)
-{
- 
-    uint16_t  differ = 0xffff-nus-5;
-  __HAL_TIM_SetCounter(&htim2,differ);
-  HAL_TIM_Base_Start(&htim2);
-  while( differ<0xffff-5)
-    {
-        differ = __HAL_TIM_GetCounter(&htim2);
-    };
-  HAL_TIM_Base_Stop(&htim2);
-}
-//脉冲发射
-
-void ir_send(void){
-	uint16_t pulse_sequence[] = {8967,4499,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,598,598,598,598,1671,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,598,598,1671,598,598,598,598,598,1671,598,598,598,19984,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,598,598,1671,598,598,598,40150,8967,4499,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,598,598,598,598,1671,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,1671,598,1671,598,598,598,598,598,1671,598,598,598,19984,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,598,1671,598,1671,598,598,598,598,598};
-	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
-	for (uint16_t i = 0; i < sizeof(pulse_sequence) / sizeof(pulse_sequence[0]); i++) {
-			if(i % 2 == 0){
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,pulse_sequence[i] * (1894/ 1000000)); //微秒转计数器值  1894为ARR可改
-			}else{
-				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,0);
-			}
-		user_delaynus_tim(pulse_sequence[i]);
-	 }
-}
 /* USER CODE END 0 */
 
 /**
@@ -114,10 +111,10 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM2_Init();
-  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
