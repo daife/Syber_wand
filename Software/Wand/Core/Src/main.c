@@ -147,7 +147,8 @@ short gx = 0, gy = 0, gz = 0;
 uint8_t data_feed_On = 0;
 uint8_t count = 0; // feed count
 short gyro[150][3] = {0};
-uint8_t received = 0;
+uint8_t received1 = 0;
+uint8_t received2 = 0;
 uint8_t KeyCode = 0;
 
 // Enabletype
@@ -387,7 +388,7 @@ void user_delaynus_tim(uint32_t nus)
   HAL_TIM_Base_Stop(&htim2);
 }
 
-void ir_send(uint16_t *dstArray,uint16_t len){
+void IR_send(uint16_t *dstArray,uint16_t len){
 HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
 	for (uint16_t i = 0; i < len; i++) {
 			if(i % 2 == 0){
@@ -407,7 +408,7 @@ void AC_send(){
 	ir_binary_open(1,0,p,srcArraylens);
 	uint16_t decode_len=ir_decode(KEY_AC_POWER,decoded,&ac_status,0);
 	ir_close();
-        IR_send(decoded,decode_len);
+  IR_send(decoded,decode_len);
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -523,9 +524,11 @@ int8_t model_get_output(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+
 	if (GPIO_Pin == GPIO_PIN_0) // T=10ms
 	{
 		MPU_Get_Gyroscope(&gx, &gy, &gz);
+			printf("hh");
 		if (ENwork && !HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
 		{
 			// send xyz to simulate mouse move
@@ -546,14 +549,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 }
 
+//uart1 for hc05(shangweiji);uart2 for asrpro;uart3 for ble(only tx)
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if (huart == &huart3 && ENrecognize)
+	if (huart == &huart2 && ENrecognize)
 	{ // from asrpro
-		switch (received)
+		switch (received2)
 		{
 		case 1:
-			// ENwork, simulate key2
+			// to ENwork, simulate key2
 			KEY_FIFO_Put(KEY_2_DOWN);
 			break;
 		case 2:
@@ -563,7 +567,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		}
 		if (ENwork)
 		{ // only ENwork,it can do other cmd from asrpro
-			switch (received)
+			switch (received2)
 			{
 			case 3:
 				break;
@@ -572,9 +576,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		}
 	}
 
-	if (huart == &huart2)
+	if (huart == &huart1)
 	{ // from shangweiji ,highest permission
-		switch (received)
+		switch (received1)
 		{
 		case 1:
 			//
@@ -583,7 +587,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		}
 	}
 
-	received = 0; // clear
+	received1 = 0; // clear
+	received2 = 0 ;
 }
 /* USER CODE END PFP */
 
@@ -632,24 +637,48 @@ int main(void)
   MX_TIM4_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+	HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_RESET);
+	HAL_Delay(500);
+	HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_SET);
 // crate CNN model
 #ifdef NNOM_USING_STATIC_MEMORY
 	nnom_set_static_buf(static_buf, sizeof(static_buf));
 #endif // NNOM_USING_STATIC_MEMORY
 
+printf("hhh");
 	MPU_Init();
 	model = nnom_model_create();
+	while(1){
+			MPU_Get_Gyroscope(&gx, &gy, &gz);
+			printf("\r\n%d",gx);
+		HAL_Delay(10);
+	}
 
 AC_init();
+
 	// get data from flash
 
 	KEY_Init();
-	HAL_TIM_Base_Start_IT(&htim3);
+	//HAL_TIM_Base_Start_IT(&htim3);
 
-	HAL_UART_Receive_IT(&huart2, &received, 1);
-AC_update(2);//ceshi
-AC_send();
+HAL_UART_Receive_IT(&huart1, &received1, 1);
+	HAL_UART_Receive_IT(&huart2, &received2, 1);
+
+//	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+//				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,1894/3); //微秒转计数器�?  1894为ARR可改
+//						HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
+//				__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,45);
+RGB_RED(12);
+				
+				while(1){
+				HAL_Delay(500);
+				}
+	 //HAL_TIM_PWM_Stop(&htim3,TIM_CHANNEL_1);
+//	while(1){
+//AC_update(2);//ceshi
+//AC_send();
+//	HAL_Delay(500);
+//	}
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -15,7 +15,7 @@ typedef struct
 	uint8_t B;
 }RGB_Color_TypeDef;
  
-#define Pixel_NUM 1  //LED数量宏定义，这里我使用一个LED，（单词pixel为像素的意思）
+#define Pixel_NUM 12  //LED数量宏定义，这里我使用一个LED，（单词pixel为像素的意思）
  
 void RGB_SetColor(uint8_t LedId,RGB_Color_TypeDef Color);//给一个LED装载24个颜色数据码（0码和1码）
 void Reset_Load(void); //该函数用于将数组最后24个数据变为0，代表RESET_code
