@@ -2,15 +2,7 @@
 #include "tim.h"
  
 /*Some Static Colors------------------------------*/
-const RGB_Color_TypeDef RED      = {255,0,0};   //显示红色RGB数据
-const RGB_Color_TypeDef GREEN    = {0,255,0};
-const RGB_Color_TypeDef BLUE     = {0,0,255};
-const RGB_Color_TypeDef SKY      = {0,255,255};
-const RGB_Color_TypeDef MAGENTA  = {255,0,220};
-const RGB_Color_TypeDef YELLOW   = {127,216,0};
-const RGB_Color_TypeDef OEANGE   = {127,106,0};
-const RGB_Color_TypeDef BLACK    = {0,0,0};
-const RGB_Color_TypeDef WHITE    = {255,255,255};
+
  
 /*二维数组存放最终PWM输出数组，每一行24个
 数据代表一个LED，最后一行24个0代表RESET码*/
@@ -52,64 +44,39 @@ void RGB_SendArray(void)
 	HAL_TIM_PWM_Start_DMA(&htim1, TIM_CHANNEL_1, (uint32_t *)Pixel_Buf,(Pixel_NUM+1)*24);
 }
  
-/*
-功能：显示红色
-参数：Pixel_Len为显示LED个数
-*/
-void RGB_RED(uint16_t Pixel_Len)
-{
-	uint16_t i;
-	for(i=0;i<Pixel_Len;i++)//给对应个数LED写入红色
-	{
-		RGB_SetColor(i,RED);
-	}
-	Reset_Load();
-	RGB_SendArray();
-}
- 
-/*
-功能：显示绿色
-参数：Pixel_Len为显示LED个数
-*/
-void RGB_GREEN(uint16_t Pixel_Len)
-{
-	uint16_t i;
-	for(i=0;i<Pixel_Len;i++)//给对应个数LED写入绿色
-	{
-		RGB_SetColor(i,GREEN);
-	}
-	Reset_Load();
-	RGB_SendArray();
-}
- 
-/*
-功能：显示蓝色
-参数：Pixel_Len为显示LED个数
-*/
-void RGB_BLUE(uint16_t Pixel_Len)
-{
-	uint16_t i;
-	for(i=0;i<Pixel_Len;i++)//给对应个数LED写入蓝色
-	{
-		RGB_SetColor(i,BLUE);
-	}
-	Reset_Load();
-	RGB_SendArray();
-}
- 
-/*
-功能：显示白色
-参数：Pixel_Len为显示LED个数
-*/
-void RGB_WHITE(uint16_t Pixel_Len)
-{
-	uint16_t i;
-	for(i=0;i<Pixel_Len;i++)//给对应个数LED写入白色
-	{
-		RGB_SetColor(i,WHITE);
-	}
-	Reset_Load();
-	RGB_SendArray();
-}
  
 //也可以继续添加其他颜色，和颜色变化函数等
+// 流水灯效
+void rgb_loop(RGB_Color_TypeDef Color){
+	uint16_t i;
+	for(i=0;i<Pixel_NUM-1;i++){
+		RGB_SetColor(i,Color);
+		RGB_SetColor(i+1,Color);
+		HAL_Delay(100);
+			Reset_Load();
+	RGB_SendArray();
+	}
+}
+// 呼吸灯效
+void rgb_breathe(){
+	int g,b ;
+
+	g = 0;
+	b = 0;
+
+	// 变亮
+	for(int i=0;i<50;i++){
+
+		if(g!=255){
+			g+=5;
+		}
+		if(b!=255){
+			b+=5;
+		}
+		RGB_Color_TypeDef Color_change={0,g,b};
+		RGB_SetColor(2,Color_change);
+		Reset_Load();
+		RGB_SendArray();
+		HAL_Delay(10);
+	}
+}

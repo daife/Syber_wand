@@ -11,22 +11,22 @@ uint8_t MPU_Init(void)
   uint8_t res;
   extern I2C_HandleTypeDef hi2c1;
   HAL_I2C_Init(&hi2c1);
-	printf("i2c init ok");
+
   MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X80);	//复位MPU6050
   MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X00);	//唤醒MPU6050 
-	printf("writw ok");
+
   MPU_Set_Gyro_Fsr(1);					//陀螺仪传感器,±500dps
   MPU_Set_Accel_Fsr(0);					//加速度传感器,±2g
   MPU_Set_Rate(100);						//设置采样率100Hz
-	printf("set ok");
+
   MPU_Write_Byte(MPU_INT_EN_REG,0X00);	//关闭所有中断
-	printf("a");
+
   MPU_Write_Byte(MPU_USER_CTRL_REG,0X00);	//I2C主模式关闭
-	printf("a");
+
   MPU_Write_Byte(MPU_FIFO_EN_REG,0X00);	//关闭FIFO
-	printf("a");
+
   MPU_Write_Byte(MPU_INTBP_CFG_REG,0X80);	//INT引脚低电平有效
-	printf("a");
+
   res=MPU_Read_Byte(MPU_DEVICE_ID_REG);
 	printf("\r\nMPU6050:0x%2x\r\n",res);
   if(res==MPU_ADDR)//器件ID正确
@@ -155,7 +155,7 @@ uint8_t MPU_Read_Len(uint8_t reg,uint8_t len,uint8_t *buf)
 { 
   extern I2C_HandleTypeDef hi2c1;
   HAL_I2C_Mem_Read(&hi2c1, MPU_READ, reg, I2C_MEMADD_SIZE_8BIT, buf, len, 0xfff);
-  HAL_Delay(100);
+  //HAL_Delay(5);
   
   return 0;	
 }
@@ -170,9 +170,9 @@ uint8_t MPU_Write_Byte(uint8_t reg,uint8_t data)
   unsigned char W_Data=0;
 
   W_Data = data;
-	printf("b");
+
   HAL_I2C_Mem_Write(&hi2c1, MPU_WRITE, reg, I2C_MEMADD_SIZE_8BIT, &W_Data, 1, 0xfff);
-	printf("b");
+
   HAL_Delay(100);
   
   return 0;
@@ -186,7 +186,7 @@ uint8_t MPU_Read_Byte(uint8_t reg)
   unsigned char R_Data=0;
   
   HAL_I2C_Mem_Read(&hi2c1, MPU_READ, reg, I2C_MEMADD_SIZE_8BIT, &R_Data, 1, 0xfff);
-  HAL_Delay(100);
+  //HAL_Delay(5);
   
   return R_Data;		
 }

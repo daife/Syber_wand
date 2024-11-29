@@ -3,7 +3,7 @@
 #include "stdint.h"
 #include "main.h"
 
-#define HARD_KEY_NUM	    7	   				/* 实体按键个数1，陀螺仪2，虚拟4 */
+#define HARD_KEY_NUM	    3	   				/* 实体按键个数1，陀螺仪2，虚拟4 */
 static KEY_T      s_tBtn[/*HARD_KEY_NUM*/3] = {0};//后面的虚拟无需结构体
 static KEY_FIFO_T s_tKey;						/* 按键FIFO变量,结构体 */
 
@@ -106,7 +106,7 @@ static void KEY_FIFO_Init(void)
 */
 static uint8_t IsKey1Down(void) 
 {
-	if (HAL_GPIO_ReadPin(USER_Button_GPIO_Port,USER_Button_Pin) == GPIO_PIN_RESET) //可能潜在问题：按下是SET
+	if (HAL_GPIO_ReadPin(USER_Button_GPIO_Port,USER_Button_Pin) == GPIO_PIN_SET) //可能潜在问题：按下是SET
 		return 1;
 	else 
 		return 0;
@@ -114,7 +114,7 @@ static uint8_t IsKey1Down(void)
 //暂时为roll的角速度大小
 static uint8_t IsKey2Down(void) 
 {
-	if (ENrecognize&&gx<=-400) 
+	if (gx<=-3000&&HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin)) 
 		return 1;
 	else 
 		return 0;
@@ -122,7 +122,7 @@ static uint8_t IsKey2Down(void)
 
 static uint8_t IsKey3Down(void) 
 {
-	if (ENrecognize&&gx>=400) 
+	if (gx>=3000&&HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin)) 
 		return 1;
 	else 
 		return 0;

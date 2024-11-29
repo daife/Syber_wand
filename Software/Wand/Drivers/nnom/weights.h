@@ -264,24 +264,23 @@ static nnom_model_t* nnom_model_create(void)
 
 	check_model_version(NNOM_MODEL_VERSION);
 	new_model(&model);
-	printf("newmodel set ok  ");
 
 	layer[0] = input_s(&input_1_config);
-	printf("c");
+
 	layer[1] = model.hook(conv2d_s(&conv1d_config), layer[0]);
-		printf("c");
+
 	layer[2] = model.active(act_leaky_relu(0.300000f), layer[1]);
-		printf("c");
+
 	layer[3] = model.hook(rnn_s(lstm_cell_s(&lstm_lstm_cell_config), &lstm_config), layer[2]);
-		printf("c");
+
 	layer[4] = model.hook(flatten_s(&flatten_config), layer[3]);
-		printf("c");
+
 	layer[5] = model.hook(dense_s(&dense_config), layer[4]);
-		printf("c");
+
 	layer[6] = model.hook(softmax_s(&softmax_config), layer[5]);
-		printf("c");
+
 	layer[7] = model.hook(output_s(&output0_config), layer[6]);
-	printf("hhhhh");
+
 	model_compile(&model, layer[0], layer[7]);
 	return &model;
 }

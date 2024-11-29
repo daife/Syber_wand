@@ -37,7 +37,6 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 extern short gx,gy,gz;
-extern uint8_t ENrecognize;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

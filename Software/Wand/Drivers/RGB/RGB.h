@@ -6,7 +6,7 @@
 /*这里是上文计算所得CCR的宏定义*/
 #define CODE_1       (58)       //1码定时器计数次数
 #define CODE_0       (25)       //0码定时器计数次数
- 
+
 /*建立一个定义单个LED三原色值大小的结构体*/
 typedef struct
 {
@@ -24,6 +24,8 @@ void RGB_RED(uint16_t Pixel_Len);  //显示红灯
 void RGB_GREEN(uint16_t Pixel_Len);//显示绿灯
 void RGB_BLUE(uint16_t Pixel_Len); //显示蓝灯
 void RGB_WHITE(uint16_t Pixel_Len);//显示白灯
+void rgb_loop(RGB_Color_TypeDef Color);
+void rgb_breathe();
  
  
 #endif
