@@ -165,19 +165,6 @@ public class MainActivity extends AppCompatActivity {
         updateString("Could not connect to device", false);
     }
 }
-    public String getReceivedData(int receivedData) {
-    switch (receivedData) {
-        case 1:
-            return "Data 1 received";
-        case 2:
-            return "Data 2 received";
-        case 3:
-            return "Data 3 received";
-        // 从单片机收到整数数据，转化为打印输出
-        default:
-            return "Unknown data received";
-    }
-}
     
     public String getSendedData(int sendedData) {
     switch (sendedData) {
@@ -197,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         if (outputStream != null) {
             try {
             	outputStream.write(data);
-                updateString(getSendedData(data),true);
+                //updateString(getSendedData(data),true);
             } catch(Exception err) {
             	
             }
