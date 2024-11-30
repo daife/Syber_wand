@@ -1,37 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:columnCount="2"
+    android:rowCount="3"
+    android:padding="16dp"
+    android:alignmentMode="alignBounds"
+    android:useDefaultMargins="true">
 
+    <!-- Power button -->
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:text="ON"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_power"
+        android:drawablePadding="8dp"
+        android:padding="16dp" />
+
+     <Button
+        android:id="@+id/button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="2"
+        android:text="OFF"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_power"
+        android:drawablePadding="8dp"
+        android:padding="16dp" />
+    <!-- Volume buttons -->
     <Button
         android:id="@+id/button1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+" />
+        android:text="+"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_up"
+        android:drawablePadding="8dp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-" />
+        android:text="-"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_down"
+        android:drawablePadding="8dp" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ON/OFF" />
-
+    <!-- Other buttons -->
     <Button
         android:id="@+id/button4"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="上下扫风" />
+        android:text="上下扫风"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_swing"
+        android:drawablePadding="8dp" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="风速" />
-
-</LinearLayout>
+        android:text="风速"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_speed"
+        android:drawablePadding="8dp" />
+    
+        <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="模式"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="玛卡巴卡"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="库尔塔丝"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="洛克莫特"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="基尼太美"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="速速退下"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密斯卡莫斯卡"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
+</GridLayout>

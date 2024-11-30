@@ -22,6 +22,9 @@
 #define KEY_DOWN_K3		KEY_3_DOWN
 #define KEY_UP_K3		KEY_3_UP
 #define KEY_LONG_K3		KEY_3_LONG
+#define KEY_DOWN_K4  KEY_4_DOWN
+#define KEY_LONG_K4 KEY_4_LONG
+#define KEY_UP_K4 KEY_4_UP
 
 
 /* 按键ID, 主要用于KEY_GetState()函数的入口参数 */
@@ -78,6 +81,11 @@ typedef enum
 	KEY_3_DOWN,				/* 3键按下 */
 	KEY_3_UP,				/* 3键弹起 */
 	KEY_3_LONG,				/* 3键长按 */
+	
+	KEY_4_DOWN,
+	KEY_4_LONG,
+	KEY_4_UP,
+	
 	
 //	VKEY1,/*虚拟按键，可用于语音、蓝牙、手势对应的操作*/
 //	VKEY2,

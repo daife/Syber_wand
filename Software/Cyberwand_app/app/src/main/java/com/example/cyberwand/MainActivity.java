@@ -42,26 +42,26 @@ public class MainActivity extends AppCompatActivity {
     private OutputStream outputStream = null;
     private void startBluetoothListener() {
     new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try {
-                InputStream inputStream = bluetoothSocket.getInputStream();
-                byte[] buffer = new byte[1024];
-                int bytes;
-                while ((bytes = inputStream.read(buffer)) != -1) {
-                    // 将接收到的字节转换为整数
-                    int receivedData = buffer[0];
-                    // 调用getReceivedData函数处理数据
-                    String response = getReceivedData(receivedData);
-                    // 更新UI或其他操作
-                    updateString(response, false);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                updateString("Error reading from Bluetooth", false);
+    @Override
+    public void run() {
+        try {
+            InputStream inputStream = bluetoothSocket.getInputStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                // 将接收到的字节转换为字符串
+                String receivedData = new String(buffer, 0, bytesRead);
+                // 调用getReceivedData函数处理数据
+               // String response = getReceivedData(receivedData);
+                // 更新UI或其他操作
+                updateString(receivedData, false);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            updateString("Error reading from Bluetooth", false);
         }
-    }).start();
+    }
+}).start();
 }
 
     @Override
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateString(String newString, boolean prependWithLessThan) {
     // 定义最大行数
-    final int MAX_LINES = 20;
+    final int MAX_LINES = 500;
     // 计算当前sharedString的行数
     int currentLines = sharedString.split("\n").length;
 

@@ -8,6 +8,7 @@
 数据代表一个LED，最后一行24个0代表RESET码*/
 uint32_t Pixel_Buf[Pixel_NUM+1][24];       
  
+
 /*
 功能：设定单个RGB LED的颜色，把结构体中RGB的24BIT转换为0码和1码
 参数：LedId为LED序号，Color：定义的颜色结构体
@@ -52,10 +53,17 @@ void rgb_loop(RGB_Color_TypeDef Color){
 	for(i=0;i<Pixel_NUM-1;i++){
 		RGB_SetColor(i,Color);
 		RGB_SetColor(i+1,Color);
-		HAL_Delay(100);
-			Reset_Load();
+					Reset_Load();
 	RGB_SendArray();
+		HAL_Delay(100);
+
 	}
+	RGB_Color_TypeDef black={0,0,0};
+			for(int i=0;i<12;i++){
+			RGB_SetColor(i,black);
+							Reset_Load();
+	RGB_SendArray();
+			}
 }
 // 呼吸灯效
 void rgb_breathe(){
