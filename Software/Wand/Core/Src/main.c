@@ -111,7 +111,10 @@ UINT8 aux3[] = {
 	0x1D, 0x00, 0x00, 0x09, 0x00, 0x10, 0x00, 0xFF, 0xFF, 0x18, 0x00, 0x1B, 0x00, 0xFF, 0xFF, 0x1C, 0x00, 0x24, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x40, 0x00, 0xFF, 0xFF, 0x58, 0x00, 0xFF, 0xFF, 0x62, 0x00, 0xE2, 0x00, 0xEA, 0x00, 0xFF, 0xFF, 0x12, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x39, 0x30, 0x30, 0x30, 0x2C, 0x34, 0x35, 0x30, 0x30, 0x35, 0x36, 0x37, 0x2C, 0x35, 0x37, 0x37, 0x35, 0x36, 0x37, 0x2C, 0x31, 0x36, 0x37, 0x30, 0x36, 0x35, 0x32, 0x31, 0x30, 0x30, 0x30, 0x32, 0x30, 0x39, 0x30, 0x30, 0x30, 0x44, 0x43, 0x33, 0x34, 0x30, 0x30, 0x30, 0x30, 0x30, 0x41, 0x30, 0x30, 0x30, 0x32, 0x30, 0x30, 0x30, 0x30, 0x30, 0x32, 0x30, 0x30, 0x30, 0x30, 0x35, 0x30, 0x30, 0x30, 0x32, 0x30, 0x34, 0x41, 0x30, 0x30, 0x32, 0x30, 0x34, 0x36, 0x30, 0x30, 0x32, 0x30, 0x34, 0x34, 0x30, 0x30, 0x32, 0x30, 0x34, 0x32, 0x30, 0x30, 0x34, 0x30, 0x31, 0x30, 0x30, 0x30, 0x43, 0x30, 0x43, 0x30, 0x33, 0x30, 0x31, 0x30, 0x42, 0x30, 0x35, 0x30, 0x33, 0x30, 0x32, 0x30, 0x42, 0x30, 0x36, 0x30, 0x33, 0x30, 0x33, 0x30, 0x42, 0x30, 0x30, 0x30, 0x33, 0x30, 0x34, 0x30, 0x42, 0x30, 0x31, 0x30, 0x33, 0x30, 0x35, 0x30, 0x42, 0x30, 0x34, 0x30, 0x33, 0x30, 0x36, 0x30, 0x42, 0x30, 0x32, 0x30, 0x33, 0x30, 0x37, 0x30, 0x42, 0x30, 0x32, 0x30, 0x33, 0x30, 0x38, 0x30, 0x42, 0x30, 0x38, 0x30, 0x33, 0x30, 0x39, 0x30, 0x42, 0x30, 0x44, 0x30, 0x33, 0x30, 0x41, 0x30, 0x42, 0x30, 0x44, 0x30, 0x33, 0x30, 0x44, 0x30, 0x42, 0x30, 0x37, 0x30, 0x33, 0x31, 0x36, 0x30, 0x42, 0x30, 0x42, 0x30, 0x33, 0x31, 0x38, 0x30, 0x42, 0x30, 0x35, 0x30, 0x33, 0x31, 0x39, 0x30, 0x42, 0x30, 0x39, 0x30, 0x33, 0x31, 0x42, 0x30, 0x42, 0x31, 0x39, 0x30, 0x33, 0x38, 0x33, 0x30, 0x42, 0x31, 0x35, 0x30, 0x33, 0x30, 0x38, 0x30, 0x44, 0x30, 0x31, 0x30, 0x33, 0x33, 0x30, 0x33, 0x33, 0x30, 0x31, 0x30, 0x33, 0x33, 0x30, 0x33, 0x33, 0x30, 0x34, 0x30, 0x33, 0x33, 0x30, 0x33, 0x33, 0x30, 0x30, 0x30, 0x33, 0x33, 0x30, 0x33, 0x33, 0x30, 0x36, 0x30, 0x33, 0x33, 0x30, 0x33, 0x33, 0x30, 0x32, 0x30, 0x33, 0x30, 0x44, 0x31, 0x30, 0x30, 0x30, 0x30, 0x33, 0x30, 0x44, 0x31, 0x30, 0x30, 0x37};
 UINT8 aux4[] = {
 	0x1D, 0x00, 0x00, 0x09, 0x00, 0x10, 0x00, 0xFF, 0xFF, 0x18, 0x00, 0x1B, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x1C, 0x00, 0x36, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x90, 0x00, 0xB8, 0x00, 0xD8, 0x00, 0xE8, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x24, 0x01, 0x25, 0x01, 0x28, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x39, 0x30, 0x30, 0x2C, 0x34, 0x35, 0x30, 0x30, 0x36, 0x34, 0x31, 0x2C, 0x36, 0x32, 0x34, 0x36, 0x34, 0x32, 0x2C, 0x31, 0x35, 0x34, 0x30, 0x34, 0x35, 0x32, 0x31, 0x30, 0x43, 0x31, 0x30, 0x31, 0x32, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x31, 0x38, 0x34, 0x30, 0x30, 0x30, 0x31, 0x39, 0x30, 0x32, 0x30, 0x38, 0x31, 0x36, 0x30, 0x32, 0x30, 0x38, 0x31, 0x37, 0x30, 0x32, 0x30, 0x38, 0x31, 0x38, 0x30, 0x32, 0x30, 0x38, 0x31, 0x39, 0x30, 0x32, 0x30, 0x38, 0x32, 0x30, 0x30, 0x32, 0x30, 0x38, 0x32, 0x31, 0x30, 0x32, 0x30, 0x38, 0x32, 0x32, 0x30, 0x32, 0x30, 0x38, 0x32, 0x33, 0x30, 0x32, 0x30, 0x38, 0x32, 0x34, 0x30, 0x32, 0x30, 0x38, 0x32, 0x35, 0x30, 0x32, 0x30, 0x38, 0x32, 0x36, 0x30, 0x32, 0x30, 0x38, 0x32, 0x37, 0x30, 0x32, 0x30, 0x38, 0x32, 0x38, 0x30, 0x32, 0x30, 0x38, 0x32, 0x39, 0x30, 0x32, 0x30, 0x38, 0x33, 0x30, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x31, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x38, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x30, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x34, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x32, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x30, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x31, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x32, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x33, 0x30, 0x33, 0x34, 0x38, 0x34, 0x43, 0x30, 0x34, 0x30, 0x33, 0x34, 0x38, 0x34, 0x43, 0x30, 0x30, 0x30, 0x34, 0x30, 0x32, 0x30, 0x34, 0x30, 0x38, 0x30, 0x31, 0x30, 0x34, 0x30, 0x33, 0x30, 0x34, 0x30, 0x38, 0x30, 0x33, 0x30, 0x34, 0x30, 0x34, 0x30, 0x34, 0x30, 0x38, 0x30, 0x34, 0x30, 0x34, 0x30, 0x35, 0x30, 0x34, 0x30, 0x38, 0x30, 0x35, 0x30, 0x34, 0x30, 0x36, 0x30, 0x34, 0x30, 0x38, 0x30, 0x43, 0x30, 0x34, 0x30, 0x37, 0x30, 0x34, 0x30, 0x38, 0x30, 0x44, 0x54, 0x53, 0x26, 0x30, 0x54, 0x7C, 0x53, 0x26, 0x30, 0x2C, 0x32, 0x2C, 0x33};
-uint16_t decoded[1024] = {0};
+uint16_t decoded[1024] = {8979,4525,550,1693,550,1693,550,550,550,550,550,550,550,550,550,1693,550,1693,550,550,550,550,550,550,550,550,550,1693,550,550,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,1693,550,1693,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,1693,550,550,550,1693,550,1693,550};
+uint16_t decode_len=211;
+uint8_t decoded_index=0;
+uint8_t ifhigh=1;
 nnom_model_t *model;
 short gx = 0, gy = 0, gz = 0;
 uint8_t data_feed_On = 0;
@@ -125,7 +128,7 @@ RGB_Color_TypeDef rgb = {0, 0, 0};
 uint8_t ENwork = 0;
 // uint8_t workState=0;//0 for IR&1 for BLE...use gpio read
 
-uint8_t ACagreement = 101;
+uint8_t ACagreement = 101;//协议缺省?
 
 /* USER CODE END PV */
 
@@ -140,7 +143,7 @@ void ShowHex(uint8_t *buf, uint8_t len)
 	{
 		printf(" %02X", buf[i]); // 使用前导0补齐
 								 // printf(" %2X",buf[i]);  //使用前导空格补齐
-								 // printf(" %X",buf[i]);  //输出朿短皿16进制格式
+								 // printf(" %X",buf[i]);  //输出16进制格式
 	}
 	printf("\r\n");
 }
@@ -151,22 +154,23 @@ void AC_init()
 	printf("W25Q64 Device ID is 0x%04x\r\n", device_id);
 	uint8_t read_buf[6] = {0};
 	printf("read ac data");
-	W25QXX_Read(read_buf, 0, 6);
-	printf("读取空调历史信息如下:?");
+	W25QXX_Read(read_buf, 10, 6);
+	printf("读取空调历史信息如下:");
 	ShowHex(read_buf, 6);
 	// first download
-	ac_status.ac_mode = AC_MODE_COOL;
-	ac_status.ac_power = AC_POWER_OFF;
-	ac_status.ac_temp = AC_TEMP_26;
-	ac_status.ac_wind_dir = AC_SWING_ON;
-	ac_status.ac_wind_speed = AC_WS_LOW;
+//	ac_status.ac_mode = AC_MODE_COOL;
+//	ac_status.ac_power = AC_POWER_OFF;
+//	ac_status.ac_temp = AC_TEMP_26;
+//	ac_status.ac_wind_dir = AC_SWING_ON;
+//	ac_status.ac_wind_speed = AC_WS_LOW;
 
-	// ACagreement=read_buf[0];
-	//	    ac_status.ac_mode=(t_ac_mode)read_buf[1];
-	//    ac_status.ac_power=(t_ac_power)read_buf[2];
-	//    ac_status.ac_temp=(t_ac_temperature)read_buf[3];
-	//    ac_status.ac_wind_dir=(t_ac_swing)read_buf[4];
-	//    ac_status.ac_wind_speed=(t_ac_wind_speed)read_buf[5];
+	//not first
+	 ACagreement=read_buf[0];
+		    ac_status.ac_mode=(t_ac_mode)read_buf[1];
+	    ac_status.ac_power=(t_ac_power)read_buf[2];
+	    ac_status.ac_temp=(t_ac_temperature)read_buf[3];
+	    ac_status.ac_wind_dir=(t_ac_swing)read_buf[4];
+	    ac_status.ac_wind_speed=(t_ac_wind_speed)read_buf[5];
 }
 
 void AC_save()
@@ -179,7 +183,7 @@ void AC_save()
 	write_buf[4] = ac_status.ac_wind_dir;
 	write_buf[5] = ac_status.ac_wind_speed;
 	printf("已保存空调信息到内存:");
-	W25QXX_Page_Program(write_buf, 0, 6); // 写数捿
+	W25QXX_Page_Program(write_buf, 10, 6); // 写数据
 	ShowHex(write_buf, 6);
 }
 void AC_update(uint8_t mode)
@@ -260,42 +264,18 @@ void AC_getsrcArray(UINT8 **p, UINT16 *srcArraylens)
 		break;
 	}
 }
-// 微秒延迟
 
-void user_delaynus_tim(uint32_t nus)
-{
 
-	uint16_t differ = 0xffff - nus - 5;
-	__HAL_TIM_SetCounter(&htim2, differ);
-	HAL_TIM_Base_Start(&htim2);
-	while (differ < 0xffff - 5)
-	{
-		differ = __HAL_TIM_GetCounter(&htim2);
-	};
-	HAL_TIM_Base_Stop(&htim2);
-}
-
-void IR_send(uint16_t *dstArray, uint16_t len)
-{
-	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-	for (uint16_t i = 0; i < len; i++)
-	{
-		if (i % 2 == 0)
-		{
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 1894 / 3); // 微秒转计数器倿  1894为ARR可改
-		}
-		else
-		{
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-		}
-		user_delaynus_tim(dstArray[i]);
-		// printf("%d,",dstArray[i]);
-	}
-	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
-}
 void AC_send()
 {
-	KEY_FIFO_Put(KEY_4_UP);
+				UINT8 *p = NULL;
+			UINT16 srcArraylens = 0;
+					AC_getsrcArray(&p, &srcArraylens);
+				ir_binary_open(1, 0, p, srcArraylens);
+				decode_len = ir_decode(KEY_AC_POWER, decoded, &ac_status, 0);
+				ir_close();
+		HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+	HAL_TIM_Base_Start_IT(&htim2);
 }
 void setrgb(RGB_Color_TypeDef Color)
 {
@@ -316,7 +296,7 @@ void dataProcess(uint8_t receivedData)
 	}
 	if (receivedData == 255)
 	{
-		printf("没有收到新指令??");
+		printf("没有收到新指令?");
 	}
 	else if (receivedData >= 100)
 	{
@@ -326,7 +306,7 @@ void dataProcess(uint8_t receivedData)
 		printf("协议已修改，是否有反应？");
 	}
 
-	// 不在工作状濁时候不弿
+	// 不在工作状态时不可以
 	if (ENwork == 1)
 	{
 		switch (receivedData)
@@ -565,10 +545,30 @@ void mouseMove(signed char x, signed char y)
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim == &htim4)
+	if(htim==&htim2){
+		// 微秒延迟,重载值11，故频率6mhz，计数6次才1微秒
+		//看其他地方有用while函数硬等的，但是我这里不知道为什么似乎计数器的频率高于while的频率，导致计时不准确，故采用中断的方式
+		
+				if(decoded_index==decode_len){
+					__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1,0);
+					HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+			HAL_TIM_Base_Stop_IT(&htim2);
+			decoded_index=0;
+			ifhigh=1;
+		}else{
+		__HAL_TIM_SetCounter(&htim2,0);
+		__HAL_TIM_SET_AUTORELOAD(&htim2,decoded[decoded_index]*6-1);
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, ifhigh==1?(1894 / 3):0); 
+		ifhigh=!ifhigh;
+		decoded_index++;
+		}
+
+		
+		
+}else if (htim == &htim4)
 	{
 		KEY_Scan();
-		// original exti0
+		// original exti0，原来采用外部中断，但我这里不知道是硬件问题还是咋，开外部中断就会卡i2c
 
 		MPU_Get_Gyroscope(&gx, &gy, &gz);
 		// printf("%d\r\n",gx);
@@ -591,7 +591,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				}
 				else
 				{
-					x = (signed char)gx;
+					x = (signed char)gx/maxmove;
 				}
 
 				if (gz >= maxmove)
@@ -604,7 +604,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				}
 				else
 				{
-					y = (signed char)gz;
+					y = (signed char)gz/maxmove;
 				}
 				mouseMove(x, y);
 			}
@@ -619,7 +619,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				model_feed_data();
 				data_feed_On = 0;
 				count = 0;
-				model_get_output(); // recognize gesture and work
+				model_get_output(); // recognize gesture
 			}
 		}
 	}
@@ -644,45 +644,45 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
-	/* USER CODE BEGIN 1 */
+  /* USER CODE BEGIN 1 */
 
-	/* USER CODE END 1 */
+  /* USER CODE END 1 */
 
-	/* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration--------------------------------------------------------*/
 
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-	/* USER CODE BEGIN Init */
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE END Init */
+  /* USER CODE END Init */
 
-	/* Configure the system clock */
-	SystemClock_Config();
+  /* Configure the system clock */
+  SystemClock_Config();
 
-	/* USER CODE BEGIN SysInit */
+  /* USER CODE BEGIN SysInit */
 
-	/* USER CODE END SysInit */
+  /* USER CODE END SysInit */
 
-	/* Initialize all configured peripherals */
-	MX_GPIO_Init();
-	MX_DMA_Init();
-	MX_USART1_UART_Init();
-	MX_USART2_UART_Init();
-	MX_USART3_UART_Init();
-	MX_SPI2_Init();
-	MX_I2C1_Init();
-	MX_TIM1_Init();
-	MX_TIM3_Init();
-	MX_TIM4_Init();
-	MX_TIM2_Init();
-	/* USER CODE BEGIN 2 */
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
+  MX_SPI2_Init();
+  MX_I2C1_Init();
+  MX_TIM1_Init();
+  MX_TIM3_Init();
+  MX_TIM4_Init();
+  MX_TIM2_Init();
+  /* USER CODE BEGIN 2 */
 
 	printf("连上了！");
 // crate CNN model
@@ -709,56 +709,56 @@ int main(void)
 	}
 	HAL_UART_Receive_IT(&huart1, &received, 1);
 	HAL_UART_Receive_IT(&huart2, &received, 1);
-	/* USER CODE END 2 */
+  /* USER CODE END 2 */
 
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
 	while (1)
 	{
 		KeyCode = KEY_FIFO_Get();
 		if (KeyCode != KEY_NONE)
 		{
-			UINT8 *p = NULL;
-			UINT16 srcArraylens = 0;
+			//UINT8 *p = NULL;
+			//UINT16 srcArraylens = 0;
 			switch (KeyCode)
 			{
 			case KEY_DOWN_K1:
 				printf("按下了按用户按键");
 				HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_SET);
-				if (!HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
-				{
-					// click mouse
-					mouseclick();
-				}
+//				if (!HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
+//				{
+//					// click mouse
+//					mouseclick();
+//				}
 				break;
 			case KEY_1_LONG:
-				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
-				{
+//				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
+//				{
 					//...rgb ,finger light slowly
-					// 开始进行手势识刿,键鼠模式没有资格手势识别、渐亮蓝灯
+					// 开始进行手势识别,键鼠模式无法手势识别、渐亮蓝灯
 					data_feed_On = 1;
 					rgb_breathe();
-				}
+//				}
 
 				break;
 			case KEY_1_UP:
 				printf("松开了用户按键");
 				HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_RESET);
 				count = 0;
-				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
-				{ // 键鼠模式也不能流水灯
+				//if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
+				//{ // 键鼠模式也不能流水灯
 					for (int i = 0; i < 12; i++)
 					{
 						RGB_SetColor(i, BLACK);
 						Reset_Load();
 						RGB_SendArray();
 					}
-				}
-				else
-				{
+				//}
+				//else
+				//{
 					// disclick mouse
-					mousediscli();
-				}
+				//	mousediscli();
+				//}
 				break;
 			case KEY_DOWN_K2:
 				printf("超大角度1");
@@ -782,59 +782,60 @@ int main(void)
 				break;
 			case KEY_4_UP:
 
-				AC_getsrcArray(&p, &srcArraylens);
-				ir_binary_open(1, 0, p, srcArraylens);
-				uint16_t decode_len = ir_decode(KEY_AC_POWER, decoded, &ac_status, 0);
-				ir_close();
-				IR_send(decoded, decode_len);
+//				AC_getsrcArray(&p, &srcArraylens);
+//				ir_binary_open(1, 0, p, srcArraylens);
+//				uint16_t decode_len = ir_decode(KEY_AC_POWER, decoded, &ac_status, 0);
+//				ir_close();
+//				IR_send(decoded, decode_len);
 				break;
 			default:
 				break;
 			}
 		}
-		/* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
-		/* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 	}
-	/* USER CODE END 3 */
+  /* USER CODE END 3 */
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
+  * @brief System Clock Configuration
+  * @retval None
+  */
 void SystemClock_Config(void)
 {
-	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-	/** Initializes the RCC Oscillators according to the specified parameters
-	 * in the RCC_OscInitTypeDef structure.
-	 */
-	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-	RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-	RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
-	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-	RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-	{
-		Error_Handler();
-	}
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Initializes the CPU, AHB and APB buses clocks
-	 */
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
-	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
-	{
-		Error_Handler();
-	}
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /* USER CODE BEGIN 4 */
@@ -842,33 +843,33 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
 void Error_Handler(void)
 {
-	/* USER CODE BEGIN Error_Handler_Debug */
+  /* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
 	while (1)
 	{
 	}
-	/* USER CODE END Error_Handler_Debug */
+  /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-	/* USER CODE BEGIN 6 */
+  /* USER CODE BEGIN 6 */
 	/* User can add his own implementation to report the file name and line number,
 	   ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-	/* USER CODE END 6 */
+  /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

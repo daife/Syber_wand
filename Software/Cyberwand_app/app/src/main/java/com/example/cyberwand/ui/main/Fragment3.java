@@ -36,6 +36,8 @@ public class Fragment3 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
+        //textView.setText(((MainActivity) getActivity()).getSharedString());
         // 滚动到最底部
         scrollView.post(new Runnable() {
             @Override
