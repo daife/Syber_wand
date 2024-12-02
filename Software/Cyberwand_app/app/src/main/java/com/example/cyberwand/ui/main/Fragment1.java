@@ -47,7 +47,7 @@ public class Fragment1 extends Fragment {
                             code=104;
                             break;
                             case "None":
-                            code=105;
+                            code=0x0D;
                             break;
                             case "gree1":
                             code=111;

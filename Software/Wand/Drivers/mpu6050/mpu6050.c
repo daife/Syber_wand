@@ -31,7 +31,7 @@ uint8_t MPU_Init(void)
 	printf("\r\nMPU6050:0x%2x\r\n",res);
   if(res==MPU_ADDR)//器件ID正确
   {
-		//MPU_Set_LPF(1);//设置数字低通滤波器
+		//MPU_Set_LPF(190);//设置数字低通滤波器
     MPU_Write_Byte(MPU_PWR_MGMT1_REG,0X01);	//设置CLKSEL,PLL X轴为参考
     MPU_Write_Byte(MPU_PWR_MGMT2_REG,0X00);	//加速度与陀螺仪都工作
     MPU_Set_Rate(100);						//设置采样率为100Hz

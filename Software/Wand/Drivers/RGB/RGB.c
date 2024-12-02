@@ -55,7 +55,7 @@ void rgb_loop(RGB_Color_TypeDef Color){
 		RGB_SetColor(i+1,Color);
 					Reset_Load();
 	RGB_SendArray();
-		HAL_Delay(100);
+		HAL_Delay(60);
 
 	}
 	RGB_Color_TypeDef black={0,0,0};

@@ -57,7 +57,13 @@ RGB_Color_TypeDef WHITE = {255, 255, 255};
 #define QUANTIFICATION_SCALE (pow(2, INPUT_1_OUTPUT_DEC))
 #define OUPUT_THRESHOLD 63 // The out put of model must bigger than this value unless the out put would be unrecognized.
 #define IMU_SEQUENCE_LENGTH_MAX (150)
-#define maxmove 5000
+#define countReloadvalue 2000 //达到重载值重装并触发一次移动
+#define flashbegin 10 //前面有坏块，使用后面的内存区域
+
+#define xbias -250 //陀螺仪的零飘
+#define zbias -80
+
+#define mouseGain 6 //鼠标增益，类似dpi?
 
 //+-500 to radian is divided by (73.537*180/PI) = 4213.359738
 #define IMU_GYRO_TRANS_RADIAN_CONSTANT (4213.359738)
@@ -112,14 +118,20 @@ UINT8 aux3[] = {
 UINT8 aux4[] = {
 	0x1D, 0x00, 0x00, 0x09, 0x00, 0x10, 0x00, 0xFF, 0xFF, 0x18, 0x00, 0x1B, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x1C, 0x00, 0x36, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x90, 0x00, 0xB8, 0x00, 0xD8, 0x00, 0xE8, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0x24, 0x01, 0x25, 0x01, 0x28, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x39, 0x30, 0x30, 0x2C, 0x34, 0x35, 0x30, 0x30, 0x36, 0x34, 0x31, 0x2C, 0x36, 0x32, 0x34, 0x36, 0x34, 0x32, 0x2C, 0x31, 0x35, 0x34, 0x30, 0x34, 0x35, 0x32, 0x31, 0x30, 0x43, 0x31, 0x30, 0x31, 0x32, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x31, 0x38, 0x34, 0x30, 0x30, 0x30, 0x31, 0x39, 0x30, 0x32, 0x30, 0x38, 0x31, 0x36, 0x30, 0x32, 0x30, 0x38, 0x31, 0x37, 0x30, 0x32, 0x30, 0x38, 0x31, 0x38, 0x30, 0x32, 0x30, 0x38, 0x31, 0x39, 0x30, 0x32, 0x30, 0x38, 0x32, 0x30, 0x30, 0x32, 0x30, 0x38, 0x32, 0x31, 0x30, 0x32, 0x30, 0x38, 0x32, 0x32, 0x30, 0x32, 0x30, 0x38, 0x32, 0x33, 0x30, 0x32, 0x30, 0x38, 0x32, 0x34, 0x30, 0x32, 0x30, 0x38, 0x32, 0x35, 0x30, 0x32, 0x30, 0x38, 0x32, 0x36, 0x30, 0x32, 0x30, 0x38, 0x32, 0x37, 0x30, 0x32, 0x30, 0x38, 0x32, 0x38, 0x30, 0x32, 0x30, 0x38, 0x32, 0x39, 0x30, 0x32, 0x30, 0x38, 0x33, 0x30, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x31, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x38, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x30, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x34, 0x30, 0x33, 0x30, 0x30, 0x30, 0x34, 0x30, 0x32, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x30, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x31, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x32, 0x30, 0x33, 0x34, 0x43, 0x35, 0x30, 0x30, 0x33, 0x30, 0x33, 0x34, 0x38, 0x34, 0x43, 0x30, 0x34, 0x30, 0x33, 0x34, 0x38, 0x34, 0x43, 0x30, 0x30, 0x30, 0x34, 0x30, 0x32, 0x30, 0x34, 0x30, 0x38, 0x30, 0x31, 0x30, 0x34, 0x30, 0x33, 0x30, 0x34, 0x30, 0x38, 0x30, 0x33, 0x30, 0x34, 0x30, 0x34, 0x30, 0x34, 0x30, 0x38, 0x30, 0x34, 0x30, 0x34, 0x30, 0x35, 0x30, 0x34, 0x30, 0x38, 0x30, 0x35, 0x30, 0x34, 0x30, 0x36, 0x30, 0x34, 0x30, 0x38, 0x30, 0x43, 0x30, 0x34, 0x30, 0x37, 0x30, 0x34, 0x30, 0x38, 0x30, 0x44, 0x54, 0x53, 0x26, 0x30, 0x54, 0x7C, 0x53, 0x26, 0x30, 0x2C, 0x32, 0x2C, 0x33};
 uint16_t decoded[1024] = {8979,4525,550,1693,550,1693,550,550,550,550,550,550,550,550,550,1693,550,1693,550,550,550,550,550,550,550,550,550,1693,550,550,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,1693,550,1693,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,550,550,1693,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,550,1693,550,1693,550,550,550,1693,550,1693,550};
-uint16_t decode_len=211;
+	uint16_t decode_len=211;//缺省值
 uint8_t decoded_index=0;
 uint8_t ifhigh=1;
+	uint8_t ifcollectmpu=0;//测试用，打印陀螺仪零飘
+	long int ggx=0;//
+	long int ggz=0;//
 nnom_model_t *model;
 short gx = 0, gy = 0, gz = 0;
 uint8_t data_feed_On = 0;
 uint8_t count = 0; // feed count
 short gyro[150][3] = {0};
+long int x_sum=0;//键鼠计数
+long int y_sum=0;
+uint8_t ifclicking=0;//鼠标是否按下
 uint8_t received = 255;
 uint8_t KeyCode = 0;
 RGB_Color_TypeDef rgb = {0, 0, 0};
@@ -128,7 +140,7 @@ RGB_Color_TypeDef rgb = {0, 0, 0};
 uint8_t ENwork = 0;
 // uint8_t workState=0;//0 for IR&1 for BLE...use gpio read
 
-uint8_t ACagreement = 101;//协议缺省?
+uint8_t ACagreement = 101;//协议缺省
 
 /* USER CODE END PV */
 
@@ -154,7 +166,7 @@ void AC_init()
 	printf("W25Q64 Device ID is 0x%04x\r\n", device_id);
 	uint8_t read_buf[6] = {0};
 	printf("read ac data");
-	W25QXX_Read(read_buf, 10, 6);
+	W25QXX_Read(read_buf, flashbegin, 6);
 	printf("读取空调历史信息如下:");
 	ShowHex(read_buf, 6);
 	// first download
@@ -183,7 +195,7 @@ void AC_save()
 	write_buf[4] = ac_status.ac_wind_dir;
 	write_buf[5] = ac_status.ac_wind_speed;
 	printf("已保存空调信息到内存:");
-	W25QXX_Page_Program(write_buf, 10, 6); // 写数据
+	W25QXX_Page_Program(write_buf, flashbegin, 6); // 写数据
 	ShowHex(write_buf, 6);
 }
 void AC_update(uint8_t mode)
@@ -260,7 +272,9 @@ void AC_getsrcArray(UINT8 **p, UINT16 *srcArraylens)
 		*p = aux4;
 		*srcArraylens = sizeof(aux4);
 	default:
-		printf("wdf?哪个协议?");
+		*p = aux1;
+		*srcArraylens = sizeof(aux1);
+		printf("内存坏块或协议不存在，已切换为寝室空调默认协议");
 		break;
 	}
 }
@@ -294,9 +308,12 @@ void dataProcess(uint8_t receivedData)
 		printf("ENworkMode");
 		KEY_FIFO_Put(KEY_4_LONG);
 	}
-	if (receivedData == 255)
-	{
-		printf("没有收到新指令?");
+	//测试mpu6050
+	if (receivedData==0x0D){
+	printf("开始打印MPU6050平均值");
+		ggx=0;
+		ggz=0;
+		ifcollectmpu=1;
 	}
 	else if (receivedData >= 100)
 	{
@@ -528,19 +545,20 @@ int8_t model_get_output(void)
 	return ret;
 }
 void mouseclick()
-{
+{ifclicking=0x01;
 	uint8_t data1[8] = {0x08, 0x00, 0xA1, 0x02, 0x01, 0x00, 0x00, 0x00};
 	HAL_UART_Transmit(&huart3, data1, 8, 0xFFFF);
 }
 void mousediscli()
 {
+	ifclicking=0x00;
 	uint8_t data2[8] = {0x08, 0x00, 0xA1, 0x02, 0x00, 0x00, 0x00, 0x00};
 	HAL_UART_Transmit(&huart3, data2, 8, 0xFFFF);
 }
 
 void mouseMove(signed char x, signed char y)
 {
-	uint8_t data[8] = {0x08, 0x00, 0xA1, 0x02, 0x00, x, y, 0x00};
+	uint8_t data[8] = {0x08, 0x00, 0xA1, 0x02, ifclicking, x, y, 0x00};
 	HAL_UART_Transmit(&huart3, data, 8, 0xFFFF);
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -572,43 +590,59 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 		MPU_Get_Gyroscope(&gx, &gy, &gz);
 		// printf("%d\r\n",gx);
-		// printf("hh");
+		
+		//测试用
+		if(ifcollectmpu!=0){
+		ggx+=gx;
+			ggz+=gz;
+			if(ifcollectmpu==100){
+				printf("x:%d",(int)ggx/100);
+				printf("z:%d",(int)ggz/100);
+				ifcollectmpu=0;
+			
+			}else{
+			ifcollectmpu++;
+			}
+		}
+		//
+		
+		
 		if (!HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
 		{
 			// jianshumoshi
-			if (gx >= 300 || gx <= -300 || gz >= 300 || gz <= -300)
-			{
-				// 归一化
-				// for x
-				signed char x, y;
-				if (gx >= maxmove)
-				{
-					x = 127;
-				}
-				else if (gx <= -maxmove)
-				{
-					x = -127;
-				}
-				else
-				{
-					x = (signed char)gx/maxmove;
-				}
-
-				if (gz >= maxmove)
-				{
-					y = 127;
-				}
-				else if (gz <= -maxmove)
-				{
-					y = -127;
-				}
-				else
-				{
-					y = (signed char)gz/maxmove;
-				}
-				mouseMove(x, y);
+			
+			x_sum+=(gx-xbias)*mouseGain;
+			y_sum+=(gz-zbias)*mouseGain;
+			//for x
+			signed char i=0;
+			while(x_sum>countReloadvalue){
+				x_sum-=countReloadvalue;
+				i--;
+			
 			}
+			
+			while(x_sum<-countReloadvalue){
+			x_sum+=countReloadvalue;
+				i++;
+			}
+			mouseMove(i,0);
+			
+			
+			//for y
+			i=0;
+						while(y_sum>countReloadvalue){
+				y_sum-=countReloadvalue;
+							i++;
+			
+			}
+						while(y_sum<-countReloadvalue){
+			y_sum+=countReloadvalue;
+							i--;
+			}
+						mouseMove(0,i);
+
 		}
+		
 		if (data_feed_On)
 		{
 			gyro[count][Roll] = gx;
@@ -725,41 +759,42 @@ int main(void)
 			case KEY_DOWN_K1:
 				printf("按下了按用户按键");
 				HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_SET);
-//				if (!HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
-//				{
-//					// click mouse
-//					mouseclick();
-//				}
+				if (!HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
+				{
+					// click mouse
+					mouseclick();
+				}
 				break;
 			case KEY_1_LONG:
-//				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
-//				{
+				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
+				{
 					//...rgb ,finger light slowly
 					// 开始进行手势识别,键鼠模式无法手势识别、渐亮蓝灯
 					data_feed_On = 1;
 					rgb_breathe();
-//				}
+				}
 
 				break;
 			case KEY_1_UP:
 				printf("松开了用户按键");
 				HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_RESET);
 				count = 0;
-				//if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
-				//{ // 键鼠模式也不能流水灯
+				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
+				{ // 键鼠模式也不能流水灯
 					for (int i = 0; i < 12; i++)
 					{
 						RGB_SetColor(i, BLACK);
 						Reset_Load();
 						RGB_SendArray();
 					}
-				//}
-				//else
-				//{
+				}
+				else
+				{
 					// disclick mouse
-				//	mousediscli();
-				//}
+					mousediscli();
+				}
 				break;
+				//以下没啥用的按键
 			case KEY_DOWN_K2:
 				printf("超大角度1");
 				break;
@@ -767,16 +802,17 @@ int main(void)
 				break;
 			case KEY_DOWN_K3: //
 				printf("超大角度2");
+			break;
 			case KEY_DOWN_K4:
-				rgb_loop(rgb);
+				//rgb_loop(rgb);
 				break;
 			case KEY_4_LONG:
 				setrgb(BLUE);
 				rgb_loop(rgb);
-				HAL_Delay(500);
+				HAL_Delay(100);
 				setrgb(BLUE);
 				rgb_loop(rgb);
-				HAL_Delay(500);
+				HAL_Delay(100);
 				setrgb(BLUE);
 				rgb_loop(rgb);
 				break;
