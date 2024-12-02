@@ -4,7 +4,7 @@
 #include "main.h"
 
 #define HARD_KEY_NUM	    4	   				/* 实体按键个数1，陀螺仪2，虚拟1 */
-#define THRES 5000 //大角速度判别阈值（虽然没有设置任何触发后的操作
+#define THRES 9000 //大角速度判别阈值（虽然没有设置任何触发后的操作
 static KEY_T      s_tBtn[/*HARD_KEY_NUM*/3] = {0};//后面的虚拟无需结构体
 static KEY_FIFO_T s_tKey;						/* 按键FIFO变量,结构体 */
 
@@ -115,17 +115,17 @@ static uint8_t IsKey1Down(void)
 //暂时为roll的角速度大小
 static uint8_t IsKey2Down(void) 
 {
-	if (gx<=-THRES&&HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin)) 
-		return 1;
-	else 
+//	if (gx<=-THRES&&HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin)) 
+//		return 1;
+//	else 
 		return 0;
 }
 
 static uint8_t IsKey3Down(void) 
 {
-	if (gx>=THRES&&HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin)) 
-		return 1;
-	else 
+//	if (gx>=THRES&&HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin)) 
+//		return 1;
+//	else 
 		return 0;
 }
 

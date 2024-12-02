@@ -304,7 +304,7 @@ void dataProcess(uint8_t receivedData)
 	if (receivedData == 0x00)
 	{
 		ENwork = 1;
-		HAL_UART_Transmit(&huart2, &data[1], 1, 0xfff);
+		HAL_UART_Transmit(&huart2, &data[1], 1,0xfff);
 		printf("ENworkMode");
 		KEY_FIFO_Put(KEY_4_LONG);
 	}
@@ -319,7 +319,7 @@ void dataProcess(uint8_t receivedData)
 	{
 		AC_update(receivedData);
 		AC_send();
-		HAL_UART_Transmit(&huart2, &data[9], 1, 0xfff);
+		HAL_UART_Transmit(&huart2, &data[9], 1,0xfff);
 		printf("协议已修改，是否有反应？");
 	}
 
@@ -339,13 +339,13 @@ void dataProcess(uint8_t receivedData)
 			KEY_FIFO_Put(KEY_4_DOWN);
 			break;
 		case 0x03: // jinitaimei
-			HAL_UART_Transmit(&huart2, &data[0], 1, 0xfff);
+			HAL_UART_Transmit(&huart2, &data[0], 1,0xfff);
 			printf("食不食油饼？");
 			setrgb(MAGENTA);
 			KEY_FIFO_Put(KEY_4_DOWN);
 			break;
 		case 0x04: // tuichu
-			HAL_UART_Transmit(&huart2, &data[10], 1, 0xfff);
+			HAL_UART_Transmit(&huart2, &data[10], 1,0xfff);
 			printf("bye");
 			ENwork = 0;
 			setrgb(YELLOW);
@@ -356,24 +356,24 @@ void dataProcess(uint8_t receivedData)
 			AC_update(1);
 			AC_send();
 			printf("AC on");
-			HAL_UART_Transmit(&huart2, &data[2], 1, 0xfff);
+			HAL_UART_Transmit(&huart2, &data[2], 1,0xfff);
 			break;
 		case 0x06: // AC off
 			AC_update(0);
 			AC_send();
 			printf("AC off");
-			HAL_UART_Transmit(&huart2, &data[3], 1, 0xfff);
+			HAL_UART_Transmit(&huart2, &data[3], 1,0xfff);
 			break;
 		case 0x07: // temp up
 			AC_update(4);
-			HAL_UART_Transmit(&huart2, &data[9], 1, 0xfff);
+			HAL_UART_Transmit(&huart2, &data[9], 1,0xfff);
 			AC_send();
 			printf("temprature up");
 
 			break;
 		case 0x08: // temp dowm
 			AC_update(5);
-			HAL_UART_Transmit(&huart2, &data[9], 1, 0xfff);
+			HAL_UART_Transmit(&huart2, &data[9], 1,0xfff);
 			AC_send();
 			printf("temperature down");
 
@@ -382,7 +382,7 @@ void dataProcess(uint8_t receivedData)
 			if (ac_status.ac_wind_dir == AC_SWING_OFF)
 			{
 				AC_update(6);
-				HAL_UART_Transmit(&huart2, &data[6], 1, 0xfff);
+				HAL_UART_Transmit(&huart2, &data[6], 1,0xfff);
 			}
 			else
 			{
@@ -395,12 +395,12 @@ void dataProcess(uint8_t receivedData)
 			if (ac_status.ac_mode == AC_MODE_COOL)
 			{
 				AC_update(3);
-				HAL_UART_Transmit(&huart2, &data[4], 1, 0xfff);
+				HAL_UART_Transmit(&huart2, &data[4], 1,0xfff);
 			}
 			else
 			{
 				AC_update(2);
-				HAL_UART_Transmit(&huart2, &data[5], 1, 0xfff);
+				HAL_UART_Transmit(&huart2, &data[5], 1,0xfff);
 			}
 			AC_send();
 			printf("空调模式改变");
@@ -422,7 +422,7 @@ void dataProcess(uint8_t receivedData)
 			{
 				AC_update(8);
 			}
-			HAL_UART_Transmit(&huart2, &data[7], 1, 0xfff);
+			HAL_UART_Transmit(&huart2, &data[7], 1,0xfff);
 			AC_send();
 			printf("风速改变");
 
@@ -484,7 +484,7 @@ int8_t model_get_output(void)
 		uint8_t data[10] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09};
 	case Unrecognized:
 		printf("Unrecognized");
-		HAL_UART_Transmit(&huart2, &data[8], 1, 0xffff);
+		HAL_UART_Transmit(&huart2, &data[8], 1,0xfff);
 		break;
 	case RightAngle:
 		printf("RightAngle");
@@ -537,7 +537,7 @@ int8_t model_get_output(void)
 		break;
 	case NoMotion:
 		printf("Unrecognized");
-		HAL_UART_Transmit(&huart2, &data[8], 1, 0xfff);
+		HAL_UART_Transmit(&huart2, &data[8], 1,0xfff);
 		break;
 	}
 	printf("\n");
@@ -547,19 +547,19 @@ int8_t model_get_output(void)
 void mouseclick()
 {ifclicking=0x01;
 	uint8_t data1[8] = {0x08, 0x00, 0xA1, 0x02, 0x01, 0x00, 0x00, 0x00};
-	HAL_UART_Transmit(&huart3, data1, 8, 0xFFFF);
+	HAL_UART_Transmit(&huart3, data1, 8,0xfff);
 }
 void mousediscli()
 {
 	ifclicking=0x00;
 	uint8_t data2[8] = {0x08, 0x00, 0xA1, 0x02, 0x00, 0x00, 0x00, 0x00};
-	HAL_UART_Transmit(&huart3, data2, 8, 0xFFFF);
+	HAL_UART_Transmit(&huart3, data2, 8,0xfff);
 }
 
 void mouseMove(signed char x, signed char y)
 {
 	uint8_t data[8] = {0x08, 0x00, 0xA1, 0x02, ifclicking, x, y, 0x00};
-	HAL_UART_Transmit(&huart3, data, 8, 0xFFFF);
+	HAL_UART_Transmit(&huart3, data, 8,0xfff);
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -613,33 +613,35 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			
 			x_sum+=(gx-xbias)*mouseGain;
 			y_sum+=(gz-zbias)*mouseGain;
-			//for x
-			signed char i=0;
-			while(x_sum>countReloadvalue){
-				x_sum-=countReloadvalue;
-				i--;
 			
-			}
-			
-			while(x_sum<-countReloadvalue){
-			x_sum+=countReloadvalue;
-				i++;
-			}
-			mouseMove(i,0);
-			
-			
-			//for y
-			i=0;
-						while(y_sum>countReloadvalue){
-				y_sum-=countReloadvalue;
-							i++;
-			
-			}
-						while(y_sum<-countReloadvalue){
-			y_sum+=countReloadvalue;
-							i--;
-			}
-						mouseMove(0,i);
+			//串口3的dma被占用了没办法，用中断模式会乱码（不知道为啥，可能是被其他中断打断了？），故移动到主循环
+//			//for x
+//			signed char i=0;
+//			while(x_sum>countReloadvalue){
+//				x_sum-=countReloadvalue;
+//				i--;
+//			
+//			}
+//			
+//			while(x_sum<-countReloadvalue){
+//			x_sum+=countReloadvalue;
+//				i++;
+//			}
+//			mouseMove(i,0);
+//			
+//			
+//			//for y
+//			i=0;
+//						while(y_sum>countReloadvalue){
+//				y_sum-=countReloadvalue;
+//							i++;
+//			
+//			}
+//						while(y_sum<-countReloadvalue){
+//			y_sum+=countReloadvalue;
+//							i--;
+//			}
+//						mouseMove(0,i);
 
 		}
 		
@@ -749,6 +751,36 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
+		
+					//for x
+			signed char i=0;
+			while(x_sum>countReloadvalue){
+				x_sum-=countReloadvalue;
+				i--;
+			
+			}
+			
+			while(x_sum<-countReloadvalue){
+			x_sum+=countReloadvalue;
+				i++;
+			}
+			mouseMove(i,0);
+			
+			
+			//for y
+			i=0;
+						while(y_sum>countReloadvalue){
+				y_sum-=countReloadvalue;
+							i++;
+			
+			}
+						while(y_sum<-countReloadvalue){
+			y_sum+=countReloadvalue;
+							i--;
+			}
+						mouseMove(0,i);
+			
+			
 		KeyCode = KEY_FIFO_Get();
 		if (KeyCode != KEY_NONE)
 		{
@@ -778,7 +810,6 @@ int main(void)
 			case KEY_1_UP:
 				printf("松开了用户按键");
 				HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_RESET);
-				count = 0;
 				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
 				{ // 键鼠模式也不能流水灯
 					for (int i = 0; i < 12; i++)
@@ -795,14 +826,14 @@ int main(void)
 				}
 				break;
 				//以下没啥用的按键
-			case KEY_DOWN_K2:
-				printf("超大角度1");
-				break;
-			case KEY_2_LONG:
-				break;
-			case KEY_DOWN_K3: //
-				printf("超大角度2");
-			break;
+//			case KEY_DOWN_K2:
+//				printf("超大角度1");
+//				break;
+//			case KEY_2_LONG:
+//				break;
+//			case KEY_DOWN_K3: //
+//				printf("超大角度2");
+//			break;
 			case KEY_DOWN_K4:
 				//rgb_loop(rgb);
 				break;
@@ -817,12 +848,7 @@ int main(void)
 				rgb_loop(rgb);
 				break;
 			case KEY_4_UP:
-
-//				AC_getsrcArray(&p, &srcArraylens);
-//				ir_binary_open(1, 0, p, srcArraylens);
-//				uint16_t decode_len = ir_decode(KEY_AC_POWER, decoded, &ac_status, 0);
-//				ir_close();
-//				IR_send(decoded, decode_len);
+				
 				break;
 			default:
 				break;
