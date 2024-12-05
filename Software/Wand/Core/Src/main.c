@@ -58,7 +58,7 @@ RGB_Color_TypeDef WHITE = {255, 255, 255};
 #define OUPUT_THRESHOLD 63 // The out put of model must bigger than this value unless the out put would be unrecognized.
 #define IMU_SEQUENCE_LENGTH_MAX (150)
 #define countReloadvalue 2000 //达到重载值重装并触发一次移动
-#define flashbegin 10 //前面有坏块，使用后面的内存区域
+#define flashbegin 63 //前面有坏块，使用后面的内存区域
 
 #define xbias -250 //陀螺仪的零飘
 #define zbias -80
@@ -159,45 +159,95 @@ void ShowHex(uint8_t *buf, uint8_t len)
 	}
 	printf("\r\n");
 }
+int decode_backup_data(uint8_t *data) {
+    uint8_t backup_data[6] = {0};
+    uint8_t count[256] = {0}; // 存储每个字节的出现次数
+    uint8_t max_count = 0; // 存储最大出现次数
+    uint8_t max_value = 0; // 存储出现次数最多的值
 
-void AC_init()
-{ // read from flash
-	uint16_t device_id = W25QXX_ReadID();
-	printf("W25Q64 Device ID is 0x%04x\r\n", device_id);
-	uint8_t read_buf[6] = {0};
-	printf("read ac data");
-	W25QXX_Read(read_buf, flashbegin, 6);
-	printf("读取空调历史信息如下:");
-	ShowHex(read_buf, 6);
-	// first download
-//	ac_status.ac_mode = AC_MODE_COOL;
-//	ac_status.ac_power = AC_POWER_OFF;
-//	ac_status.ac_temp = AC_TEMP_26;
-//	ac_status.ac_wind_dir = AC_SWING_ON;
-//	ac_status.ac_wind_speed = AC_WS_LOW;
+    // 统计每个字节的出现次数
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 10; j++) {
+            count[data[i + j * 6]]++;
+        }
+        // 找出最大出现次数及其对应的值
+        max_count = 0;
+        max_value = 0;
+        for (int k = 0; k < 256; k++) {
+            if (count[k] > max_count) {
+                max_count = count[k];
+                max_value = k;
+            }
+        }
+				
+        // 如果最大出现次数小于5，或者第一次刷入内存（存在0xff）则返回0
+        if (max_count < 6||max_value==255) {
+            return 0;
+        }
+        backup_data[i] = max_value;
+        // 重置计数器，以便下一次统计
+        memset(count, 0, sizeof(count));
+    }
 
-	//not first
-	 ACagreement=read_buf[0];
-		    ac_status.ac_mode=(t_ac_mode)read_buf[1];
-	    ac_status.ac_power=(t_ac_power)read_buf[2];
-	    ac_status.ac_temp=(t_ac_temperature)read_buf[3];
-	    ac_status.ac_wind_dir=(t_ac_swing)read_buf[4];
-	    ac_status.ac_wind_speed=(t_ac_wind_speed)read_buf[5];
+    // 将出现次数最多的值赋给ac_status
+    ACagreement = backup_data[0];
+    ac_status.ac_mode = (t_ac_mode)backup_data[1];
+    ac_status.ac_power = (t_ac_power)backup_data[2];
+    ac_status.ac_temp = (t_ac_temperature)backup_data[3];
+    ac_status.ac_wind_dir = (t_ac_swing)backup_data[4];
+    ac_status.ac_wind_speed = (t_ac_wind_speed)backup_data[5];
+
+    return 1; // 成功
 }
 
-void AC_save()
-{
-	uint8_t write_buf[6] = {0};
-	write_buf[0] = ACagreement;
-	write_buf[1] = ac_status.ac_mode;
-	write_buf[2] = ac_status.ac_power;
-	write_buf[3] = ac_status.ac_temp;
-	write_buf[4] = ac_status.ac_wind_dir;
-	write_buf[5] = ac_status.ac_wind_speed;
-	printf("已保存空调信息到内存:");
-	W25QXX_Page_Program(write_buf, flashbegin, 6); // 写数据
-	ShowHex(write_buf, 6);
+void AC_init() {
+    uint16_t device_id = W25QXX_ReadID();
+    printf("W25Q64 Device ID is 0x%04x\r\n", device_id);
+    
+    uint8_t read_buf[60] = {0}; // 每个数据存储10个备份，共6个数据，所以是60个字节
+    W25QXX_Read(read_buf, flashbegin, 60);
+		printf("正在读取断电前空调数据...\r\n");
+    
+    // 解码备份数据
+    if (decode_backup_data(read_buf)) {
+			printf("读取成功\r\n");
+    } else {
+        // 错误处理
+			printf("不行，内存坏块太tmd多了,使用默认设置\r\n");
+			ACagreement=101;
+				ac_status.ac_mode = AC_MODE_COOL;
+	ac_status.ac_power = AC_POWER_OFF;
+	ac_status.ac_temp = AC_TEMP_26;
+	ac_status.ac_wind_dir = AC_SWING_ON;
+	ac_status.ac_wind_speed = AC_WS_LOW;
+    }
 }
+
+// 保存空调状态
+void AC_save() {
+    uint8_t write_buf[60] = {0};
+    write_buf[0] = ACagreement;
+    write_buf[1] = ac_status.ac_mode;
+    write_buf[2] = ac_status.ac_power;
+    write_buf[3] = ac_status.ac_temp;
+    write_buf[4] = ac_status.ac_wind_dir;
+    write_buf[5] = ac_status.ac_wind_speed;
+    
+    // 复制10个备份
+    memcpy(write_buf + 6, write_buf, 6);
+    memcpy(write_buf + 12, write_buf, 6);
+    memcpy(write_buf + 18, write_buf, 6);
+    memcpy(write_buf + 24, write_buf, 6);
+    memcpy(write_buf + 30, write_buf, 6);
+    memcpy(write_buf + 36, write_buf, 6);
+    memcpy(write_buf + 42, write_buf, 6);
+    memcpy(write_buf + 48, write_buf, 6);
+    memcpy(write_buf + 54, write_buf, 6);
+    
+    W25QXX_Page_Program(write_buf, flashbegin, 60); // 写数据
+		printf("已保存空调信息到内存\r\n");
+}
+
 void AC_update(uint8_t mode)
 {
 	/*0 off;1 on;2 cool;3 hot;4 temp++;5 temp--;6swingON;7swingOFF;8wind auto ;9wind low;10wind middle;11wind high
@@ -274,7 +324,7 @@ void AC_getsrcArray(UINT8 **p, UINT16 *srcArraylens)
 	default:
 		*p = aux1;
 		*srcArraylens = sizeof(aux1);
-		printf("内存坏块或协议不存在，已切换为寝室空调默认协议");
+		printf("内存坏块或协议不存在，已切换为寝室空调默认协议\r\n");
 		break;
 	}
 }
@@ -305,22 +355,28 @@ void dataProcess(uint8_t receivedData)
 	{
 		ENwork = 1;
 		HAL_UART_Transmit(&huart2, &data[1], 1,0xfff);
-		printf("ENworkMode");
+		printf("ENworkMode\r\n");
 		KEY_FIFO_Put(KEY_4_LONG);
 	}
 	//测试mpu6050
 	if (receivedData==0x0D){
-	printf("开始打印MPU6050平均值");
+	printf("开始打印MPU6050平均值\r\n");
 		ggx=0;
 		ggz=0;
 		ifcollectmpu=1;
+	}
+	if(receivedData==0x0E){
+		printf("正在进行软复位...\r\n");
+KEY_FIFO_Put(KEY_4_UP);
+		
+	
 	}
 	else if (receivedData >= 100)
 	{
 		AC_update(receivedData);
 		AC_send();
 		HAL_UART_Transmit(&huart2, &data[9], 1,0xfff);
-		printf("协议已修改，是否有反应？");
+		printf("协议已修改，是否有反应？\r\n");
 	}
 
 	// 不在工作状态时不可以
@@ -329,24 +385,24 @@ void dataProcess(uint8_t receivedData)
 		switch (receivedData)
 		{
 		case 0x01: // kuertasi
-			printf("kurtasi?");
+			printf("kurtasi?\r\n");
 			setrgb(RED);
 			KEY_FIFO_Put(KEY_4_DOWN);
 			break;
 		case 0x02: // luokemote
-			printf("lokemote?");
+			printf("lokemote?\r\n");
 			setrgb(SKY);
 			KEY_FIFO_Put(KEY_4_DOWN);
 			break;
 		case 0x03: // jinitaimei
 			HAL_UART_Transmit(&huart2, &data[0], 1,0xfff);
-			printf("食不食油饼？");
+			printf("食不食油饼？\r\n");
 			setrgb(MAGENTA);
 			KEY_FIFO_Put(KEY_4_DOWN);
 			break;
 		case 0x04: // tuichu
 			HAL_UART_Transmit(&huart2, &data[10], 1,0xfff);
-			printf("bye");
+			printf("bye\r\n");
 			ENwork = 0;
 			setrgb(YELLOW);
 			KEY_FIFO_Put(KEY_4_DOWN);
@@ -355,27 +411,27 @@ void dataProcess(uint8_t receivedData)
 		case 0x05: // AC on
 			AC_update(1);
 			AC_send();
-			printf("AC on");
+			printf("AC on\r\n");
 			HAL_UART_Transmit(&huart2, &data[2], 1,0xfff);
 			break;
 		case 0x06: // AC off
 			AC_update(0);
 			AC_send();
-			printf("AC off");
+			printf("AC off\r\n");
 			HAL_UART_Transmit(&huart2, &data[3], 1,0xfff);
 			break;
 		case 0x07: // temp up
 			AC_update(4);
 			HAL_UART_Transmit(&huart2, &data[9], 1,0xfff);
 			AC_send();
-			printf("temprature up");
+			printf("temprature up\r\n");
 
 			break;
 		case 0x08: // temp dowm
 			AC_update(5);
 			HAL_UART_Transmit(&huart2, &data[9], 1,0xfff);
 			AC_send();
-			printf("temperature down");
+			printf("temperature down\r\n");
 
 			break;
 		case 0x09: // swing
@@ -389,7 +445,7 @@ void dataProcess(uint8_t receivedData)
 				AC_update(7);
 			}
 			AC_send();
-			printf("扫风模式改变");
+			printf("扫风模式改变\r\n");
 			break;
 		case 0x0A: // mode
 			if (ac_status.ac_mode == AC_MODE_COOL)
@@ -403,7 +459,7 @@ void dataProcess(uint8_t receivedData)
 				HAL_UART_Transmit(&huart2, &data[5], 1,0xfff);
 			}
 			AC_send();
-			printf("空调模式改变");
+			printf("空调模式改变\r\n");
 			break;
 		case 0x0B: // speed
 			if (ac_status.ac_wind_speed == AC_WS_AUTO)
@@ -424,11 +480,11 @@ void dataProcess(uint8_t receivedData)
 			}
 			HAL_UART_Transmit(&huart2, &data[7], 1,0xfff);
 			AC_send();
-			printf("风速改变");
+			printf("风速改变\r\n");
 
 			break;
 		case 0x0C: // misikamosika
-			printf("米老鼠？");
+			printf("米老鼠？\r\n");
 			setrgb(OEANGE);
 			KEY_FIFO_Put(KEY_4_DOWN);
 			break;
@@ -483,60 +539,60 @@ int8_t model_get_output(void)
 	{
 		uint8_t data[10] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09};
 	case Unrecognized:
-		printf("Unrecognized");
+		printf("Unrecognized\r\n");
 		HAL_UART_Transmit(&huart2, &data[8], 1,0xfff);
 		break;
 	case RightAngle:
-		printf("RightAngle");
+		printf("RightAngle\r\n");
 		dataProcess(0x01);
 		break;
 	case SharpAngle:
-		printf("SharpAngle");
+		printf("SharpAngle\r\n");
 		dataProcess(0x02);
 
 		break;
 	case Lightning:
-		printf("Lightning");
+		printf("Lightning\r\n");
 		dataProcess(0x03);
 		break;
 	case Triangle:
-		printf("Triangle");
+		printf("Triangle\r\n");
 		dataProcess(0x04);
 		break;
 	case Letter_h:
-		printf("Letter_h");
+		printf("Letter_h\r\n");
 		dataProcess(0x05);
 		break;
 	case letter_R:
-		printf("Letter_R");
+		printf("Letter_R\r\n");
 		dataProcess(0x06);
 		break;
 	case letter_W:
-		printf("Letter_W");
+		printf("Letter_W\r\n");
 		dataProcess(0x07);
 		break;
 	case letter_phi:
-		printf("Letter_phi");
+		printf("Letter_phi\r\n");
 		dataProcess(0x08);
 		break;
 	case Circle:
-		printf("Circle");
+		printf("Circle\r\n");
 		dataProcess(0x00);
 		break;
 	case UpAndDown:
-		printf("UpAndDown");
+		printf("UpAndDown\r\n");
 		dataProcess(0x09);
 		break;
 	case Horn:
-		printf("Horn");
+		printf("Horn\r\n");
 		dataProcess(0x0A);
 		break;
 	case Wave:
-		printf("Wave");
+		printf("Wave\r\n");
 		dataProcess(0x0B);
 		break;
 	case NoMotion:
-		printf("Unrecognized");
+		printf("Unrecognized\r\n");
 		HAL_UART_Transmit(&huart2, &data[8], 1,0xfff);
 		break;
 	}
@@ -655,6 +711,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				model_feed_data();
 				data_feed_On = 0;
 				count = 0;
+				printf("开始识别手势\r\n");
 				model_get_output(); // recognize gesture
 			}
 		}
@@ -687,7 +744,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	start:
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -720,7 +777,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-	printf("连上了！");
+	printf("连上了！\r\n");
 // crate CNN model
 #ifdef NNOM_USING_STATIC_MEMORY
 	nnom_set_static_buf(static_buf, sizeof(static_buf));
@@ -737,11 +794,11 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim4);
 	if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
 	{
-		printf("初始化为手势模式");
+		printf("初始化为手势模式\r\n");
 	}
 	else
 	{
-		printf("初始化为键鼠模式");
+		printf("初始化为键鼠模式\r\n");
 	}
 	HAL_UART_Receive_IT(&huart1, &received, 1);
 	HAL_UART_Receive_IT(&huart2, &received, 1);
@@ -789,7 +846,7 @@ int main(void)
 			switch (KeyCode)
 			{
 			case KEY_DOWN_K1:
-				printf("按下了按用户按键");
+				printf("按下了按用户按键\r\n");
 				HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_SET);
 				if (!HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
 				{
@@ -802,13 +859,14 @@ int main(void)
 				{
 					//...rgb ,finger light slowly
 					// 开始进行手势识别,键鼠模式无法手势识别、渐亮蓝灯
+					printf("开始采集手势数据...\r\n");
 					data_feed_On = 1;
 					rgb_breathe();
 				}
 
 				break;
 			case KEY_1_UP:
-				printf("松开了用户按键");
+				printf("松开了用户按键\r\n");
 				HAL_GPIO_WritePin(PA1_LED_GPIO_Port, PA1_LED_Pin, GPIO_PIN_RESET);
 				if (HAL_GPIO_ReadPin(USER_Button2_GPIO_Port, USER_Button2_Pin))
 				{ // 键鼠模式也不能流水灯
@@ -835,7 +893,7 @@ int main(void)
 //				printf("超大角度2");
 //			break;
 			case KEY_DOWN_K4:
-				//rgb_loop(rgb);
+				rgb_loop(rgb);
 				break;
 			case KEY_4_LONG:
 				setrgb(BLUE);
@@ -848,6 +906,7 @@ int main(void)
 				rgb_loop(rgb);
 				break;
 			case KEY_4_UP:
+				goto start;
 				
 				break;
 			default:

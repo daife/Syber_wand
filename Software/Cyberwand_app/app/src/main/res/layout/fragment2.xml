@@ -124,4 +124,12 @@
         android:textSize="18sp"
         android:drawableLeft="@drawable/ic_mode"
         android:drawablePadding="8dp" />
+        <Button
+        android:id="@+id/button14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="软复位"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/ic_mode"
+        android:drawablePadding="8dp" />
 </GridLayout>

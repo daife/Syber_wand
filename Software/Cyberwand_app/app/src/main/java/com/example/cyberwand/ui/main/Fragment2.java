@@ -24,7 +24,7 @@ public class Fragment2 extends Fragment {
         View view = inflater.inflate(R.layout.fragment2, container, false);
 
         // Initialize buttons and set their onClick listeners
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 14; i++) {
             int buttonId = getResources().getIdentifier("button" + (i + 1), "id", getContext().getPackageName());
             Button button = view.findViewById(buttonId);
             button.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,9 @@ public class Fragment2 extends Fragment {
                             case "密斯卡莫斯卡":
                             code=0x0C;
                             break;
-                            
+                            case "软复位":
+                            code=0x0E;
+                            break;
                         }
                          ((MainActivity) getActivity()).sendData(code);
             // 将按钮的文本传递给updateString方法
